@@ -217,7 +217,7 @@ ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
 				</md-input-container> 
 				<md-input-container>  
 					<label>Número de identificación</label>
-					<input ng-model="solicitudCtrl.solicitudForm.numIdentificacion" type="number" name="numIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<input ng-model="solicitudCtrl.solicitudForm.numIdentificacion" type="text" name="numIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
 					<div ng-messages="solicitudForm.numIdentificacion.$error" ng-show="solicitudForm.numIdentificacion.$touched">
 						<div ng-messages-include="errorMessages"></div>
 					</div>
