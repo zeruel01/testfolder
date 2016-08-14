@@ -20,7 +20,7 @@
 						<p>{{ item.fechaCarga }}</p>
 						<p><span ng-show="item.validado" class="docValidado">Documento validado <i class="fa fa-check-circle"></i></span><span ng-show="!item.validado" class="docNoValidado">Documento no validado <i class="fa fa-times-circle"></i></span></p>
 						<md-button aria-label="boton ng-show="!item.validado" class="md-secondary md-fab md-mini" 
-						ng-if="solicitudCtrl.solicitudForm.editable"
+						ng-if="solicitud.editable"
 						ng-click="documentos.eliminar(item.id_documento_cargado)"
 						><i class="fa fa-trash fa-lg"></i></md-button>
 					</div>

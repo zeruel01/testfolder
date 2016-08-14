@@ -28,7 +28,7 @@ ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
 			<md-content class="md-padding md-body-2" layout="column">
 				<md-input-container>
 					<label>Número de Seguridad Social (NSS)*</label>
-					<input ng-model="solicitudCtrl.solicitudForm.nss" type="number" name="nss" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="NSS"
+					<input ng-model="solicitudCtrl.solicitudForm.nss" type="text" name="nss" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="NSS"
 					
 					ui-mask="***********" ui-mask-placeholder-char="_"     ui-options="{clearOnBlur:false,allowInvalidValue :true}" ui-mask-placeholder
 					

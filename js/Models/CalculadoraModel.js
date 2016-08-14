@@ -8,7 +8,7 @@ angular.module('originacionApp')
 	var url = Config.ApiUrl+'calculadora/';
 	var Calculadora = $resource(url+':id'+'?token='+token, { id: '@id'},{
         calcular: {
-            method: "GET"
+            method: "POST"
         }
     });
     Calculadora.url = url;

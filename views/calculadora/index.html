@@ -43,7 +43,9 @@
 			</md-input-container> -->
 			<md-input-container>
 				<label>Número de Segurirdad Solcial (NSS)</label>
-				<input ng-model="calculadoraCtrl.datos.nss" type="number" placeholder="0">
+				<input ng-model="calculadoraCtrl.datos.nss" 
+				ui-mask="***********" ui-mask-placeholder-char="_"     ui-options="{clearOnBlur:false,allowInvalidValue :true}" ui-mask-placeholder
+				>
 
 			</md-input-container>
 

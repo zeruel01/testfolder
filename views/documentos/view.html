@@ -4,7 +4,7 @@
 			<span><i class="fa fa-file-text"></i> {{documentos.documento.nombreArchivo}}</span>
 			<span flex></span>
 			<md-button ng-show="!documentos.documento.validado" class="md-icon-button" ng-click="documentos.eliminar(documentos.documento.id_documento_cargado)"
-			ng-if="solicitudCtrl.solicitudForm.editable"
+			ng-if="solicitud.editable"
 			>
 				<i class="fa fa-trash fa-lg" ></i>
 			</md-button>
