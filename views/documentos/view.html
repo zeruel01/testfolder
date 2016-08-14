@@ -1,7 +1,7 @@
 <div ng-controller="documentosController as documentos" ng-init="documentos.loadDocumento(documentos.params.idDocumento)">
 	<md-toolbar layout="row" class="md-hue-3">
 		<div class="md-toolbar-tools">
-			<span><i class="fa fa-file-text"></i> {{documentos.documento.nombreArchivo}}</span>
+			<span><i class="fa fa-file-text"></i> {{documentos.documento.name}}</span>
 			<span flex></span>
 			<md-button ng-show="!documentos.documento.validado" class="md-icon-button" ng-click="documentos.eliminar(documentos.documento.id_documento_cargado)"
 			ng-if="solicitud.editable"
@@ -18,13 +18,13 @@
 			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 		</div>
 		<p class="error">{{documentos.message}}</p>
-		<h3 class="md-headline">{{documentos.documento.name}}</h3>
+		<!--<h3 class="md-headline">{{documentos.documento.name}}</h3>-->
 		<p><span ng-show="documentos.documento.validado" class="docValidado">Documento validado <i class="fa fa-check-circle"></i></span><span ng-show="!documentos.documento.validado" class="docNoValidado">Documento no validado <i class="fa fa-times-circle"></i></span></p>
 		<md-card>
 			<md-card-content >
 				<img ng-src="{{documentos.documento.url}}" alt="{{documentos.documento.name}}" class="md-card-image" flex-xs="100"/>
-				<p>Archivo: {{documentos.documento.nombreArchivo}}</p>
-				<p>Fecha: {{documentos.documento.fechaCarga}}</p>
+				<p>Archivo: {{documentos.documento.name}}</p>
+				<p>Fecha: {{documentos.documento.fechaCarga| date:'MM/dd/yyyy'}}</p>
 				<p>Comentarios: {{documentos.documento.comentarios}}</p>
 
 			</md-card-content>

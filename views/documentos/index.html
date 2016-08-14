@@ -17,7 +17,7 @@
 					<div class="md-list-item-text" layout="column">
 						<h3>{{ item.name }} </h3>
 						<h4>{{ item.nombreArchivo }}</h4>
-						<p>{{ item.fechaCarga }}</p>
+						<!--<p>{{ item.fechaCarga }}</p>-->
 						<p><span ng-show="item.validado" class="docValidado">Documento validado <i class="fa fa-check-circle"></i></span><span ng-show="!item.validado" class="docNoValidado">Documento no validado <i class="fa fa-times-circle"></i></span></p>
 						<md-button aria-label="boton ng-show="!item.validado" class="md-secondary md-fab md-mini" 
 						ng-if="solicitud.editable"
