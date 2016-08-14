@@ -1,0 +1,30 @@
+<div ng-controller="saldoController as saldoCtrl" ng-init="saldoCtrl.initAmortizacion()">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-table"></i> Tabla de amortización</span>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-href="#saldo" aria-label="Regresar">
+				<i class="fa fa-arrow-left fa-lg"></i>
+			</md-button>
+			<md-button class="md-icon-button" ng-href="{{saldoCtrl.urlAmortizacionPDF}}" target="_blank" aria-label="Descargar estado de cuenta">
+				<i class="fa fa-download fa-lg"></i>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content  layout-padding>
+		<md-table-container>
+			<table md-table id="tableResult">
+				<thead md-head>
+					<tr  md-row>
+					<th  md-column  ng-repeat="header in saldoCtrl.amortizacion.columns">{{header}}</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr  md-row ng-repeat="row in saldoCtrl.amortizacion.rows">
+						<td  md-cell ng-repeat="item in row track by $index">{{item}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-content>
+</div>

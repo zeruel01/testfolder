@@ -1,0 +1,15 @@
+<div layout-padding ng-controller="dashboardController as dashboard" ng-init="dashboard.init()">
+	<h3 class="md-headline">Inicio</h3>
+	<p> Bienvenido(a) {{$parent.user.name}} al sistema Originación V3 </p>
+	<p ng-show="! $parent.solicitud.id">
+		<a href="#solicitud/create" class="md-raised md-primary md-button" >Solicitar crédito</a>
+	</p>
+	<!-- <div class="galeria">
+    <div  ng-repeat="item in dashboard.galeria">{{item.url}}</div>
+</div> -->
+<slick dots="true" slides-to-show=1 slides-to-scroll=1 init-onload=true data="dashboard.galeria">
+	<div ng-repeat="item in dashboard.galeria"><img ng-src="{{ item.url }}"/></div>
+</slick>
+
+
+</div>

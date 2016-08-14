@@ -1,0 +1,87 @@
+.bg-huella{
+background: transparent url('../img/bg_huella.png');
+background-repeat: no-repeat;
+background-size: contain;
+background-position: center; 
+}
+.bg-huella md-content{
+background: rgba(255,255,255,0.8);
+}
+md-toolbar i.fa, button.md-raised, a.md-raised{
+color: #ede109 !important;
+}
+md-toolbar.md-hue-3 i.fa, md-toolbar.md-hue-3 span{
+color: #526c84 !important;
+}
+md-input-container .md-input {
+background:rgba(82, 108, 132, .3);
+height: 45px;
+}
+md-list.menu, md-sidenav a{
+color: #526c84;
+text-decoration: none;
+}
+md-list.menu a{
+padding:3px 20px;
+}
+md-list.menu i.fa{
+font-size: 1.5em;
+}
+img.md-avatar{
+width: 129px;
+height: 97px;
+border: 1px solid #526c84;
+border-radius: 0;
+margin-right:10px;
+
+}
+
+
+    .zcontainer {
+    width: 130px;
+height: 110px;;
+       border: 1px solid #526c84;
+border-radius: 0;
+margin-right:10px;
+    
+        /* add following */
+        background-size:cover;
+        background-position:50% 50%;
+    }
+
+
+/* Set the image to fill its parent and make transparent */
+/*.center-cropped img {
+  min-height: 100%;
+  min-width: 100%;
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
+  filter: alpha(opacity=0);
+
+  opacity: 0;
+}*/
+
+md-input-container label:not(.md-no-float):not(.md-container-ignore){
+padding-left: 10px;
+}
+.new{
+background-color: #faebcc;
+}
+.new *{
+font-weight: bold;
+}
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+    color: #d2b31a !important;
+    background-color:#d2b31a !important;
+}
+button.md-fab.md-fab-bottom-right.md-button.ng-scope.md-ink-ripple {
+    background-color: #f3c729;
+}
+.mensaje-mesa{
+  background-color: #d9edf7;
+  color: #31708f;
+}
+textarea{
+  height: 110px !important;
+}

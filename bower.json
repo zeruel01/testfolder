@@ -1,0 +1,15 @@
+{
+  "name": "miapp",
+  "dependencies": {
+    "angular": "~1.5.*",
+    "angular-material": "^1.0.9",
+    "angular-route": "^1.5.6",
+    "angular-material-icons": "^0.7.0",
+    "font-awesome": "fontawesome#^4.6.3",
+    "angular-sanitize": "^1.5.7",
+    "angular-scroll": "^1.0.0",
+    "angular-jk-carousel": "^0.1.5",
+    "angular-slick": "^0.2.1",
+    "moment": "^2.14.1"
+  }
+}

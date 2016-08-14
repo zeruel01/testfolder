@@ -1,0 +1,21 @@
+<div ng-controller="creditoController as creditoCtrl" ng-init="creditoCtrl.getStatusCredito()">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-credit-card"></i> Estatus del crédito</span>
+			<span flex></span>
+		</div>
+	</md-toolbar>
+	<md-content  layout-padding>
+		<div class="md-whiteframe-1dp">
+			<div ng-show="creditoCtrl.accessObj.access">
+				<h1 class="md-title">Número de solicitud:{{creditoCtrl.credito.numeroSolicitud}}</h1>
+				<p>Estatus:<strong>{{creditoCtrl.credito.statusDescripcion}}</strong></p>
+				<p>{{creditoCtrl.credito.mensaje}}</p>
+			</div>
+			<div ng-show="!creditoCtrl.accessObj.access">
+				<p>{{creditoCtrl.accessObj.message}}</p>
+				<p ng-bind-html="creditoCtrl.accessObj.template"></p>
+			</div>
+		</div>
+	</md-content>
+</div>

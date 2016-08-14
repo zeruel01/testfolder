@@ -1,0 +1,668 @@
+
+<!--type="submit"
+
+ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
+	<md-button ng-show="solicitudCtrl.solicitudForm.editable" class="md-fab md-fab-bottom-right" aria-label="Add"
+	 
+	  ng-click="solicitudCtrl.editarSolicitudMain(solicitudForm.$valid)"
+	 >
+		<i class="fa fa-send fa-lg"></i>
+	</md-button>
+	
+
+	<script type="text/ng-template" id="errorMessages" multiple>
+		<ng-include src="'views/solicitud/error_messages.html'"></ng-include>
+	</script>
+
+	<script type="text/ng-template" id="errorMessagesCurp" multiple>
+		<ng-include src="'views/solicitud/error_messagesCurp.html'"></ng-include>
+	</script>
+		<script type="text/ng-template" id="errorMessagesRfc" multiple>
+		<ng-include src="'views/solicitud/error_messagesRfc.html'"></ng-include>
+	</script>
+	<md-tabs  md-dynamic-height md-border-bottom md-selected = "solicitudCtrl.selectedTabIndex" >
+		<md-tab label="Personales" md-on-deselect ="solicitudCtrl.savePartial('Personales')"> 
+
+
+				
+			<md-content class="md-padding md-body-2" layout="column">
+				<md-input-container>
+					<label>Número de Seguridad Social (NSS)*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.nss" type="number" name="nss" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="NSS"
+					
+					ui-mask="***********" ui-mask-placeholder-char="_"     ui-options="{clearOnBlur:false,allowInvalidValue :true}" ui-mask-placeholder
+					
+					>
+				    <div ng-messages="solicitudForm.nss.$error" ng-show="solicitudForm.nss.$touched">
+				      	<div ng-messages-include="errorMessages"></div>
+				    </div>
+				</md-input-container>
+				<!-- -->
+				<md-input-container 	class="md-input-has-placeholder">
+					<label>CURP*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.curp" 
+					type="text" name="curp" 
+					
+					 ng-disabled="!solicitudCtrl.solicitudForm.editable"
+					 aria-label="curp"
+					
+				required
+				
+				    ui-options="{clearOnBlur:false,allowInvalidValue :true}" ui-mask="AAAA999999AAAAAA99" ui-mask-placeholder-char="_" ui-mask-placeholder
+                pattern="^([a-zA-Z]{4})([0-9]{6})([H,M,h,m][a-zA-Z]{5})([0-9]{2})$"
+
+					>
+					<div ng-messages="solicitudForm.curp.$error" ng-show="solicitudForm.curp.$touched">
+						<div ng-messages-include="errorMessagesCurp"></div>
+					</div>
+				</md-input-container>
+				<!----> 
+
+				<md-input-container >
+					<label>RFC</label>
+					<input ng-model="solicitudCtrl.solicitudForm.rfc" type="text" name="rfc" ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="rfc"
+						pattern="^[a-zA-Z]{4}(\d{6})((\D|\d){3})?$"
+						
+						placeholder="CUPU800825569"
+						>
+					<div ng-messages="solicitudForm.rfc.$error" ng-show="solicitudForm.rfc.$touched">
+						<div ng-messages-include="errorMessagesRfc"></div>
+					</div>
+				</md-input-container>  
+				<md-input-container>
+					<label>Nombre(s)*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.name" type="text" name="name" minlength="2" required pattern="^([a-zA-Z ñáéíóú]+)$" ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="name">
+					<div ng-messages="solicitudForm.name.$error" ng-show="solicitudForm.name.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>
+					<label>Apellido paterno*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.apdPaterno" type="text" name="apdPaterno" minlength="2" pattern="^([a-zA-Z ñáéíóú]+)$" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.apdPaterno.$error" ng-show="solicitudForm.apdPaterno.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Apellido materno*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.apdMaterno" type="text" name="apdMaterno" minlength="2" pattern="^([a-zA-Z ñáéíóú]+)$" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.apdMaterno.$error" ng-show="solicitudForm.apdMaterno.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<!-- pattern="^[0-9]{10}$" -->
+				<md-input-container class="md-input-has-placeholder">
+					<label>Teléfono*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.telefono" type="text" name="telefono" 
+					ui-options="{clearOnBlur:false}" ui-mask="(999) 9999-999" ui-mask-placeholder-char="_"
+					
+					 required 
+					
+					ng-disabled="!solicitudCtrl.solicitudForm.editable"  class="md-input-has-placeholder">
+					<div ng-messages="solicitudForm.telefono.$error" ng-show="solicitudForm.telefono.$touched">
+						<span ng-message="pattern">El numero de telefono no tiene el formato correcto</span>
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container >    
+				<md-input-container class="md-input-has-placeholder">
+					<label>Celular</label>
+					<input ng-model="solicitudCtrl.solicitudForm.celular" type="text" name="celular" 
+					ui-options="{clearOnBlur:false}" ui-mask="(999) 9999-999" ui-mask-placeholder-char="_"
+					ng-disabled="!solicitudCtrl.solicitudForm.editable"
+					>
+					<div ng-messages="solicitudForm.celular.$error" ng-show="solicitudForm.celular.$touched">
+						<span ng-message="pattern">El numero de celular no tiene el formato correcto</span>
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>
+					<label>Correo electrónico (Email)</label>
+					<input ng-model="solicitudCtrl.solicitudForm.email" type="email" name="email"  required ng-disabled="!solicitudCtrl.solicitudForm.editable"
+						pattern="^[a-zA-Z0-9\-\._+!¡#$%&*+?]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+$">
+					<div ng-messages="solicitudForm.email.$error" ng-show="solicitudForm.email.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<h3 class="md-title">Domicilio</h3>
+
+				<!--<md-input-container>
+					<label>Código postal</label>
+					<input ng-model="solicitudCtrl.solicitudForm.co" type="number" name="co" minlength="5" maxlength="5" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.co.$error" ng-show="solicitudForm.co.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> -->
+				
+            <div layout="row" layout-align="center" >
+
+                <md-input-container flex  class="md-input-has-placeholder"><label>Codigo Postal</label>
+				
+				<input 
+				  ng-blur="solicitudCtrl.getZipCodeData()"
+				ng-model="solicitudCtrl.solicitudForm.co" type="text" name="co" minlength="5" maxlength="5" required ng-disabled="!solicitudCtrl.solicitudForm.editable"
+				
+				ui-options="{clearOnBlur:false,allowInvalidValue :true}" ui-mask="99999" ui-mask-placeholder-char="#" ui-mask-placeholder
+				  ></md-input-container>
+
+                <md-button  class="md-icon-button" ng-click="solicitudCtrl.getZipCodeData()" style="margin-top: 10px;"
+				ng-disabled="!solicitudCtrl.solicitudForm.editable"
+				>
+                    <md-tooltip md-direction="top">Buscar Codigo Postal</md-tooltip>
+                    <i class="fa fa-map-marker fa-lg" ></i>
+                </md-button>
+
+            </div>
+
+
+
+					<md-input-container>
+					<label>Entidad</label>
+					<input ng-model="solicitudCtrl.solicitudForm.entidad" type="text" name="entidad" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.entidad.$error" ng-show="solicitudForm.entidad.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Municipio</label>
+					<input ng-model="solicitudCtrl.solicitudForm.minicipioDelegacion" type="text" name="minicipioDelegacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.minicipioDelegacion.$error" ng-show="solicitudForm.minicipioDelegacion.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>  
+
+        <md-input-container flex>
+            <label>Colonia</label>
+            <md-select ng-model="solicitudCtrl.solicitudForm.coloniaFraccionamiento"  placeholder="Colonia" 
+			ng-disabled="!solicitudCtrl.solicitudForm.editable"
+			>
+                <md-option ng-value="colony.d_asenta" ng-repeat="colony in colonies">{{ colony.d_asenta }}</md-option>
+            </md-select>
+        </md-input-container>
+
+					<!--<md-input-container>
+					<label>Colonia o fraccionamiento</label>
+					<input ng-model="solicitudCtrl.solicitudForm.coloniaFraccionamiento" type="text" name="coloniaFraccionamiento" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.coloniaFraccionamiento.$error" ng-show="solicitudForm.coloniaFraccionamiento.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>  -->
+
+
+				<md-input-container>
+					<label>Calle</label>
+					<input ng-model="solicitudCtrl.solicitudForm.calle"  type="text" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container>
+				<md-input-container>
+					<label>Número exterior</label>
+					<input ng-model="solicitudCtrl.solicitudForm.noExterior"  type="text" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container> 
+				<md-input-container>
+					<label>Número interior</label>
+					<input ng-model="solicitudCtrl.solicitudForm.noInterior" type="text"  ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container> 
+			     
+				
+			  
+				<h3 class="md-title">Datos de identifiación</h3>
+				<md-input-container>
+					<label>Tipo de identificación</label>
+					<md-select ng-model="solicitudCtrl.solicitudForm.tipoIdentificacion" name="tipoIdentificacion" ng-required="true" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="I" class="md-primary">Credencial para votar</md-option>
+						<md-option value="L" class="md-primary">Licencia de conducir</md-option>
+						<md-option value="P" class="md-primary">Pasaporte</md-option>
+					</md-select>
+					<div ng-messages="solicitudForm.tipoIdentificacion.$error" ng-show="solicitudForm.tipoIdentificacion.$touched || solicitudForm.tipoIdentificacion.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>  
+					<label>Número de identificación</label>
+					<input ng-model="solicitudCtrl.solicitudForm.numIdentificacion" type="number" name="numIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.numIdentificacion.$error" ng-show="solicitudForm.numIdentificacion.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>  
+					<label>Fecha de validez</label>
+					<input ng-model="solicitudCtrl.solicitudForm.vigenciaIdentificacion" type="date" name="vigenciaIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.vigenciaIdentificacion.$error" ng-show="solicitudForm.vigenciaIdentificacion.$touched">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<h3 class="md-title">Información general</h3>
+				<md-input-container>
+					<label>Número de dependientes económicos</label>
+					<input ng-model="solicitudCtrl.solicitudForm.numDependientesEconomicos" type="number" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container> 
+				<md-input-container>
+					<p>Género</p>
+					<md-select 
+					aria-label="genero"
+					ng-model="solicitudCtrl.solicitudForm.genero" name="genero" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="M" class="md-primary">Masculino</md-option>
+						<md-option value="F" class="md-primary">Femenino</md-option>
+					</md-select>
+					<div ng-messages="solicitudForm.genero.$error" ng-show="solicitudForm.genero.$touched || solicitudForm.genero.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<p>Estado civil</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.estadoCivil" ng-disabled="!solicitudCtrl.solicitudForm.editable"
+						aria-label="estado civil">
+						<md-option value="1" class="md-primary">Soltero</md-option>
+						<md-option value="2" class="md-primary">Casado</md-option>
+						<md-option value="3" class="md-primary">Separado</md-option>
+						<md-option value="4" class="md-primary">Viudo</md-option>
+						<md-option value="5" class="md-primary">Unión Libre</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<p>Regimen patrimonial del matrimonio</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.regimenPatrimonialMatrimonio" ng-disabled="!solicitudCtrl.solicitudForm.editable"
+						aria-label="regimen"
+						
+
+					>
+						<md-option value="1" class="md-primary">Separación de bienes</md-option>
+						<md-option value="2" class="md-primary">Sociedad conyugal</md-option>
+						<md-option value="3" class="md-primary">Sociedad legal</md-option>
+					</md-select>
+
+					<!--<input ng-model="solicitudCtrl.solicitudForm.numIdentificacion" type="text"
+					 name="numIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable"
+					 ng-if="!solicitudCtrl.solicitudForm.editable"
+					 >-->
+
+					
+				</md-input-container>
+				<md-input-container>
+					<p>La vivienda que actualmente habita es</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.vivienda" ng-disabled="!solicitudCtrl.solicitudForm.editable"
+						aria-label="vivienda"
+						>
+						<md-option value="1" class="md-primary">Propia</md-option>
+						<md-option value="2" class="md-primary">De familiares</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<p>Nivel de escolaridad</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.nivelEscolaridad" ng-disabled="!solicitudCtrl.solicitudForm.editable"
+						aria-label="nivel escolaridad"
+					>
+						<md-option value="1" class="md-primary">Sin estudios</md-option>
+						<md-option value="2" class="md-primary">Primaria</md-option>
+						<md-option value="3" class="md-primary">Secundaria</md-option>
+						<md-option value="4" class="md-primary">Preparatoria</md-option>
+						<md-option value="5" class="md-primary">Técnico</md-option>
+						<md-option value="6" class="md-primary">Licenciatura</md-option>
+						<md-option value="7" class="md-primary">Postgrado</md-option>
+					</md-select>
+				</md-input-container>
+			</md-content>
+		</md-tab>
+		<!-- <md-tab label="Personales">
+			<md-content class="md-padding md-body-2" layout="column">
+				<md-input-container>
+					<label>Número de Seguridad Social (NSS)*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.nss" type="number" name="nss" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="NSS">
+				    <div ng-messages="solicitudForm.nss.$error" ng-show="solicitudForm.nss.$touched || solicitudForm.nss.$invalid">
+				      	<div ng-messages-include="errorMessages"></div>
+				    </div>
+				</md-input-container> 
+				<md-input-container>
+					<label>CURP*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.curp" type="text" name="curp" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="curp" pattern="/^([a-zA-Z]{4})([0-9]{6})([H,M,h,m][A-Z]{5})([0-9]{2})$/i">
+					<div ng-messages="solicitudForm.curp.$error" ng-show="solicitudForm.curp.$touched || solicitudForm.curp.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>
+					<label>RFC</label>
+					<input ng-model="solicitudCtrl.solicitudForm.rfc" type="text" name="rfc" ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="rfc"
+						pattern="/^[a-zA-Z]{4}(\d{6})((\D|\d){3})?$/">
+					<div ng-messages="solicitudForm.rfc.$error" ng-show="solicitudForm.rfc.$touched || solicitudForm.rfc.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>  
+				<md-input-container>
+					<label>Nombre(s)*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.name" type="text" name="name" minlength="2" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="name">
+					<div ng-messages="solicitudForm.name.$error" ng-show="solicitudForm.name.$touched || solicitudForm.name.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>
+					<label>Apellido paterno*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.apdPaterno" type="text" name="apdPaterno" minlength="2" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.apdPaterno.$error" ng-show="solicitudForm.apdPaterno.$touched || solicitudForm.apdPaterno.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Apellido materno*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.apdMaterno" type="text" name="apdMaterno" minlength="2" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.apdMaterno.$error" ng-show="solicitudForm.apdMaterno.$touched || solicitudForm.apdMaterno.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Teléfono*</label>
+					<input ng-model="solicitudCtrl.solicitudForm.telefono" type="number" name="telefono" required ng-disabled="!solicitudCtrl.solicitudForm.editable" maxlength="10">
+					<div ng-messages="solicitudForm.telefono.$error" ng-show="solicitudForm.telefono.$touched || solicitudForm.telefono.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>    
+				<md-input-container>
+					<label>Celular</label>
+					<input ng-model="solicitudCtrl.solicitudForm.celular" type="number" name="celular" maxlength="10">
+					<div ng-messages="solicitudForm.celular.$error" ng-show="solicitudForm.celular.$touched || solicitudForm.celular.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>
+					<label>Email</label>
+					<input ng-model="solicitudCtrl.solicitudForm.email" type="email" name="email"  required ng-disabled="!solicitudCtrl.solicitudForm.editable"
+						pattern="/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/">
+					<div ng-messages="solicitudForm.email.$error" ng-show="solicitudForm.email.$touched || solicitudForm.email.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<h3 class="md-title">Domicilio</h3>
+				<md-input-container>
+					<label>Calle</label>
+					<input ng-model="solicitudCtrl.solicitudForm.calle"  type="text" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container>
+				<md-input-container>
+					<label>Número exterior</label>
+					<input ng-model="solicitudCtrl.solicitudForm.noExterior"  type="number" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container> 
+				<md-input-container>
+					<label>Número interior</label>
+					<input ng-model="solicitudCtrl.solicitudForm.noInterior" type="number"  ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container> 
+				<md-input-container>
+					<label>Colonia o fraccionamiento</label>
+					<input ng-model="solicitudCtrl.solicitudForm.coloniaFraccionamiento" type="text" name="coloniaFraccionamiento" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.coloniaFraccionamiento.$error" ng-show="solicitudForm.coloniaFraccionamiento.$touched || solicitudForm.coloniaFraccionamiento.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>       
+				<md-input-container>
+					<label>Código postal</label>
+					<input ng-model="solicitudCtrl.solicitudForm.co" type="number" name="co" minlength="5" maxlength="5" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.co.$error" ng-show="solicitudForm.co.$touched || solicitudForm.co.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>
+					<label>Entidad</label>
+					<input ng-model="solicitudCtrl.solicitudForm.entidad" type="text" name="entidad" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.entidad.$error" ng-show="solicitudForm.entidad.$touched || solicitudForm.entidad.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Municipio</label>
+					<input ng-model="solicitudCtrl.solicitudForm.minicipioDelegacion" type="text" name="minicipioDelegacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.minicipioDelegacion.$error" ng-show="solicitudForm.minicipioDelegacion.$touched || solicitudForm.minicipioDelegacion.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>    
+				<h3 class="md-title">Datos de identifiación</h3>
+				<md-input-container>
+					<label>Tipo de identificación</label>
+					<md-select ng-model="solicitudCtrl.solicitudForm.tipoIdentificacion" name="tipoIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="I" class="md-primary">Credencial para votar</md-option>
+						<md-option value="L" class="md-primary">Licencia de conducir</md-option>
+						<md-option value="P" class="md-primary">Pasaporte</md-option>
+					</md-select>
+					<div ng-messages="solicitudForm.tipoIdentificacion.$error" ng-show="solicitudForm.tipoIdentificacion.$touched || solicitudForm.tipoIdentificacion.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container> 
+				<md-input-container>  
+					<label>Número de identificación</label>
+					<input ng-model="solicitudCtrl.solicitudForm.numIdentificacion" type="number" name="numIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.numIdentificacion.$error" ng-show="solicitudForm.numIdentificacion.$touched || solicitudForm.numIdentificacion.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>  
+					<label>Fecha de validez</label>
+					<input ng-model="solicitudCtrl.solicitudForm.vigenciaIdentificacion" type="date" name="vigenciaIdentificacion" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+					<div ng-messages="solicitudForm.vigenciaIdentificacion.$error" ng-show="solicitudForm.vigenciaIdentificacion.$touched || solicitudForm.vigenciaIdentificacion.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<h3 class="md-title">Información general</h3>
+				<md-input-container>
+					<label>Número de dependientes económicos</label>
+					<input ng-model="solicitudCtrl.solicitudForm.numDependientesEconomicos" type="number">
+				</md-input-container> 
+				<md-input-container>
+					<p>Género</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.genero" name="genero" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="M" class="md-primary">Masculino</md-option>
+						<md-option value="F" class="md-primary">Femenino</md-option>
+					</md-select>
+					<div ng-messages="solicitudForm.genero.$error" ng-show="solicitudForm.genero.$touched || solicitudForm.genero.$invalid">
+						<div ng-messages-include="errorMessages"></div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<p>Estado civil</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.estadoCivil" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="1" class="md-primary">Soltero</md-option>
+						<md-option value="2" class="md-primary">Casado</md-option>
+						<md-option value="3" class="md-primary">Separado</md-option>
+						<md-option value="4" class="md-primary">Viudo</md-option>
+						<md-option value="5" class="md-primary">Unión Libre</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<p>Regimen patrimonial del matrimonio</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.regimenPatrimonialMatrimonio" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="1" class="md-primary">Separación de bienes</md-option>
+						<md-option value="2" class="md-primary">Sociedad conyugal</md-option>
+						<md-option value="3" class="md-primary">Sociedad legal</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<p>La vivienda que actualmente habita es</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.vivienda" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="1" class="md-primary">Propia</md-option>
+						<md-option value="2" class="md-primary">De familiares</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<p>Nivel de escolaridad</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.nivelEscolaridad" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<md-option value="1" class="md-primary">Sin estudios</md-option>
+						<md-option value="2" class="md-primary">Primaria</md-option>
+						<md-option value="3" class="md-primary">Secundaria</md-option>
+						<md-option value="4" class="md-primary">Preparatoria</md-option>
+						<md-option value="5" class="md-primary">Técnico</md-option>
+						<md-option value="6" class="md-primary">Licenciatura</md-option>
+						<md-option value="7" class="md-primary">Postgrado</md-option>
+					</md-select>
+				</md-input-container>
+			</md-content>
+		</md-tab> -->
+		<md-tab label="Empleo" md-on-deselect ="solicitudCtrl.savePartial('Empleo')"> 
+			<md-content class="md-padding md-body-2" layout="column">
+				<md-input-container>  
+					<label>Nombre de la empresa o patrón</label>
+					<input required ng-disabled="!solicitudCtrl.solicitudForm.editable" type="text" ng-model="solicitudCtrl.solicitudForm.empresaPatron">
+					<div ng-messages="solicitudForm.empresaPatron.$error">
+						<div ng-message="md-required">Campo obligatorio</div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Número de registro patronal (NRP)</label>
+					<input ng-model="solicitudCtrl.solicitudForm.numRegistroPatronal" type="number">
+				</md-input-container> 
+				<md-input-container class="md-input-has-placeholder">  
+					<label>Teléfono donde trabaja</label>
+					<input required ng-disabled="!solicitudCtrl.solicitudForm.editable" type="text" ng-model="solicitudCtrl.solicitudForm.empresaTelefono"
+					
+					ui-options="{clearOnBlur:false}" ui-mask="(999) 9999-999" ui-mask-placeholder-char="_"
+					 type="text">
+					<div ng-messages="solicitudForm.empresaTelefono.$error">
+						<div ng-message="md-required">Campo obligatorio</div>
+					</div>
+				</md-input-container>
+				<p>Horario laboral</p>
+				<md-content layout="row">
+					<md-content layout="column" flex="50"  >
+						<md-input-container>
+							<label>De</label>
+							<input  type="time" ng-model="solicitudCtrl.solicitudForm.horarioInicio" type="time" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+
+						</md-input-container>      
+					</md-content>
+					<md-content layout="column" flex="50">
+						<md-input-container>
+							<label>A</label>
+							<input  type="time" ng-model="solicitudCtrl.solicitudForm.horarioFin" type="time" ng-disabled="!solicitudCtrl.solicitudForm.editable" >
+						</md-input-container> 
+					</md-content>      
+				</md-content>
+			</md-content>
+		</md-tab>
+		<md-tab label="Referencias" md-on-deselect ="solicitudCtrl.savePartial('Referencias')">
+			<md-content class="md-padding md-body-2" layout="column">
+				<h3 class="md-title">Referencias familiares</h3>
+				<md-card  class="md-whiteframe-1dp" layout="column" layout-padding>
+					<h3 class="md-title">Primer referencia</h3>
+					<md-input-container>
+						<label>Nombre(s)</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_nombre" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_nombre.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+					<md-input-container>
+						<label>Apellido paterno</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_apdPaterno" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_apdPaterno.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+					<md-input-container>
+						<label>Apellido materno</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_apdMaterno" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_apdMaterno.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container>  
+					<md-input-container class="md-input-has-placeholder"> 
+						<label>Teléfono</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_telefono"
+						ui-options="{clearOnBlur:false}" ui-mask="(999) 9999-999" ui-mask-placeholder-char="_"
+						 required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_telefono.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container>  
+					<md-input-container class="md-input-has-placeholder">
+						<label>Celular</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_celular" required
+						ui-options="{clearOnBlur:false}" ui-mask="(999) 9999-999" ui-mask-placeholder-char="_"
+						 ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_celular.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+					<md-input-container>
+						<label>Parentesco</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_parentesco" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_parentesco.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+				</md-card>
+				<md-card  class="md-whiteframe-1dp" layout="column" layout-padding>
+					<h3 class="md-title">Segunda referencia</h3>
+					<md-input-container>
+						<label>Nombre(s)</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_nombre2" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_nombre2.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+					<md-input-container>
+						<label>Apellido paterno</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_apdPaterno2" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_apdPaterno2.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+					<md-input-container>
+						<label>Apellido materno</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_apdMaterno2" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_apdMaterno2.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container>  
+					<md-input-container class="md-input-has-placeholder">
+						<label>Teléfono</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_telefono2" 
+						ui-options="{clearOnBlur:false}" ui-mask="(999) 9999-999" ui-mask-placeholder-char="_"
+						
+						required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_telefono2.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container>  
+					<md-input-container class="md-input-has-placeholder">
+						<label>Celular</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_celular2" 
+						ui-options="{clearOnBlur:false}" ui-mask="(999) 9999-999" ui-mask-placeholder-char="_"
+						required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_celular2.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+					<md-input-container>
+						<label>Parentesco</label>
+						<input ng-model="solicitudCtrl.solicitudForm.referencias_parentesco2" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+						<div ng-messages="solicitudForm.referencias_parentesco2.$error">
+							<div ng-message="md-required">Campo obligatorio</div>
+						</div>
+					</md-input-container> 
+				</md-card>
+			</md-content>
+		</md-tab>
+		<md-tab label="Crédito" md-on-deselect ="solicitudCtrl.savePartial('Credito')">
+			<md-content class="md-padding md-body-2" layout="column">
+				<h3 class="md-title">Datos para determinar el monto del crédito</h3>
+
+				<p>A) En caso de tener descuentos:</p>
+				<md-input-container class="md-icon-float md-icon-right md-block">
+					<label>Descuento mensual por pensión alimenticia (En su Caso)</label>
+					<input type="number" ng-model="solicitudCtrl.solicitudForm.descuentoMPensionAlimenticia" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container>
+				<md-input-container>
+					<p>B) Plazo del crédito:</p>
+					<md-select ng-model="solicitudCtrl.solicitudForm.plazoCredito" ng-disabled="!solicitudCtrl.solicitudForm.editable"
+						aria-label="plazo credito">
+						<md-option value="1" class="md-primary">12 meses</md-option>
+						<md-option value="2" class="md-primary">18 meses</md-option>
+						<md-option value="3" class="md-primary">24 meses</md-option>
+						<md-option value="4" class="md-primary">30 meses</md-option>
+					</md-select>
+				</md-input-container>
+				<p>C) En caso de así necesitarlo:</p>
+				<md-input-container>
+					<label>Monto para pago de mano de obra</label>
+					<input type="number" ng-model="solicitudCtrl.solicitudForm.montoManoObra" ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container>
+				<p>D) Monto de crédito solicitado:</p>
+				<md-input-container>
+					<label>Monto</label>
+					<input type="number" ng-model="solicitudCtrl.solicitudForm.montoCreditoSolicitado" required ng-disabled="!solicitudCtrl.solicitudForm.editable">
+				</md-input-container>
+			</md-content>
+		</md-tab>
+	</md-tabs>

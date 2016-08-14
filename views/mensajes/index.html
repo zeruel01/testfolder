@@ -1,0 +1,24 @@
+<div ng-controller="mensajesController as mensajesCtrl" ng-init="mensajesCtrl.init()">
+    <md-toolbar layout="row" class="md-hue-3">
+        <div class="md-toolbar-tools">
+            <span><i class="fa fa-envelope"></i> Mensajes</span>
+        </div>
+    </md-toolbar>
+    <md-content>
+        <md-list flex>
+            <md-list-item class="md-3-line" ng-repeat="item in mensajesCtrl.mensajes" ng-click="mensajesCtrl.loadView(item.id)" ng-class="item.isNew == 1? 'new' : ''">
+                <div class="md-list-item-text" layout="column">
+                    <h3>
+                        <i class="fa fa-envelope" ng-show="item.isNew"></i> {{item.asunto}}
+                    </h3>
+                    <p>Escrito por: <strong ng-show="item.tipo==1">mi</strong><strong ng-show="item.tipo==2">Mesa de control</strong></p>
+                    <p><small>{{item.fecha}}</small></p>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+        <md-button class="md-fab md-fab-bottom-right" ng-click="mensajesCtrl.new()">
+            <i class="fa fa-plus fa-lg"></i>
+        </md-button>
+    </md-content>
+</div>

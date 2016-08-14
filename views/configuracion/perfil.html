@@ -1,0 +1,7 @@
+<md-content class="md-padding md-body-2" layout="column">
+	<img ng-src="{{configCtrl.user.selfie}}" />
+	<div class="md-padding md-body-2" layout="row">
+		<md-button class="md-fab md-primary" ng-click="configCtrl.uploadSelfie('camera')"><i class="fa fa-camera fa-lg"></i></md-button>
+		<md-button class="md-fab md-primary" ng-click="configCtrl.uploadSelfie('file')"><i class="fa fa-upload fa-lg"></i></md-button>
+	</div>
+</md-content>

@@ -1,0 +1,39 @@
+<div ng-controller="buroController as buroCtrl" ng-init="buroCtrl.loadDetail(buroCtrl.params.id)">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-bank"></i> Consulta de buró</span>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="buroCtrl.goBack()">
+				<i class="fa fa-arrow-left fa-lg"></i>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content>
+		<h1 class="md-title" layout-padding>Datos generales</h1>
+		<md-list flex>
+			<md-list-item class="md-3-line" ng-repeat="(key, item) in buroCtrl.detail.generales">
+				<div class="md-list-item-text" layout="column">
+					<h3>{{key}}</h3>
+					<p>{{item}}</p>
+				</div>
+				<md-divider></md-divider>
+			</md-list-item>
+		</md-list>
+		<h1 class="md-title" layout-padding>Historial de pagos</h1>
+		<md-tabs  md-dynamic-height md-border-bottom>
+			<md-tab label="{{item.anio}}" ng-repeat="(anio, item) in buroCtrl.detail.historial">
+				<md-content class="md-padding md-body-2" layout="column">
+					<md-table-container>
+						<table md-table>
+							<tbody md-body>
+								<tr  md-row ng-repeat="(key, row) in item.rows">
+									<td  md-cell ng-repeat="(key, cell) in row track by $index">{{cell}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</md-table-container>
+				</md-content>
+			</md-tab>
+		</md-tabs>
+	</md-content>
+</div>

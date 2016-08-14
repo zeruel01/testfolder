@@ -1,0 +1,456 @@
+<div ng-controller="registerController">
+  <md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+      <md-button href="#login" aria-label="Back">
+        <i class="fa fa-arrow-left fa-lg"></i>
+      </md-button>
+      <h1>Solicitud de crédito</h1>
+      <span flex></span>
+      <md-button aria-label="Ayuda" ng-click="showHelp()">
+        <i class="fa fa-question-circle fa-lg "></i>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-content>
+    <form name="projectForm" ng-submit="registerUser()" novalidate>
+      <md-button class="md-fab md-fab-bottom-right" aria-label="Add" type="submit">
+        <i class="fa fa-send fa-lg"></i>
+      </md-button>
+      <md-tabs class="md-primary" md-dynamic-height md-border-bottom>
+        <md-tab label="Personales">
+          <!-- <button type="submit">Prueba de registro</button> -->
+
+         <!-- <md-button class="md-fab md-fab-bottom-right" aria-label="Add" type="submit">
+          <i class="fa fa-send fa-lg"></i>
+        </md-button> -->
+        
+        
+        <div>
+          <div ng-show="loading" layout="row" layout-align="center">
+            <md-progress-circular md-mode="indeterminate">Autenticando...</md-progress-circular>
+          </div>
+          <p>{{message}}</p>
+          <p class="error">
+            {{errorMessage}}
+          </p>
+        </div>
+        
+        <md-content class="md-padding md-body-2" layout="column">
+          <h1 class="md-headline">1. Datos personales</h1>
+          <md-input-container>
+            <label>Número de Seguridad Social (NSS)</label>
+            <input ng-model="user.nss">
+          </md-input-container> 
+          <md-input-container>
+            <label>CURP</label>
+            <input ng-model="user.curp" >
+          </md-input-container> 
+          <md-input-container>
+            <label>RFC</label>
+            <input ng-model="user.rfc" >
+          </md-input-container>  
+          <md-content layout="row">
+            <md-content layout="column" flex="33"  >
+              <md-input-container>
+                <label>Nombre(s)</label>
+                <input ng-model="user.name" required type="text">
+                <div ng-messages="projectForm.name.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="33"  >
+              <md-input-container>
+                <label>Apellido paterno</label>
+                <input ng-model="user.apdPaterno" required>
+                <div ng-messages="projectForm.apdPaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="33">
+              <md-input-container>
+                <label>Apellido materno</label>
+                <input ng-model="user.apdMaterno" required>
+                <div ng-messages="projectForm.apdMaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container> 
+            </md-content>
+          </md-content> 
+          <md-content layout="row">
+            <md-content layout="column" flex="20"  >
+              <md-input-container>
+                <label>Lada</label>
+                <input ng-model="user.lada" md-maxlength="3" type="number" >
+
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="40">
+              <md-input-container>
+                <label>Teléfono</label>
+                <input ng-model="user.telefono" md-maxlength="10" type="number">
+              </md-input-container> 
+            </md-content>   
+            <md-content layout="column" flex="40">
+              <md-input-container>
+                <label>Celular</label>
+                <input ng-model="user.celular" md-maxlength="10" type="number">
+              </md-input-container> 
+            </md-content>     
+          </md-content>
+          <h3 class="md-title">Domicilio</h3>
+          <md-input-container>
+            <label>Calle y número</label>
+            <input ng-model="user.calleYNumero">
+          </md-input-container>   
+          <md-content layout="row">
+            <md-content layout="column" flex="50"  >
+              <md-input-container>
+                <label>Colonia o fraccionamiento</label>
+                <input required ng-model="user.oloniaFraccionamiento">
+                <div ng-messages="projectForm.apaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="50"  >
+              <md-input-container>
+                <label>Código postal</label>
+                <input required ng-model="user.co">
+                <div ng-messages="projectForm.apaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+          </md-content>   
+
+          <md-content layout="row">
+            <md-content layout="column" flex="50"  >
+              <md-input-container>
+                <label>Entidad</label>
+                <input required ng-model="user.entidad">
+                <div ng-messages="projectForm.apaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="50"  >
+              <md-input-container>
+                <label>Municipio actual</label>
+                <input required ng-model="user.minicipioDelegacion">
+                <div ng-messages="projectForm.apaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+          </md-content>   
+          <h3 class="md-title">Datos de identifiación</h3>
+          <md-input-container>
+            <label>Tipo de identificación</label>
+            <input required  ng-model="user.tipoIdentificacion">
+            <div ng-messages="projectForm.tipoIdentificacion.$error">
+              <div ng-message="md-required">Campo obligatorio</div>
+            </div>
+          </md-input-container> 
+          <md-input-container>  
+            <label>Número de identificación</label>
+            <input required ng-model="user.numIdentificacion">
+            <div ng-messages="projectForm.numIdentificacion.$error">
+              <div ng-message="md-required">Campo obligatorio</div>
+            </div>
+          </md-input-container>
+          <label>Fecha de validez</label>
+          <input type="date" ng-model="user.vigenciaIdentificacion">
+
+          <h3 class="md-title">General</h3>
+          <md-input-container>
+            <label>Número de dependientes económicos</label>
+            <input ng-model="user.numDependientesEconomicos" type="number">
+          </md-input-container> 
+          <md-input-container>
+            <p>Género</p>
+            <md-radio-group ng-model="user.genero">
+              <md-radio-button value="M" class="md-primary">Masculino</md-radio-button>
+              <md-radio-button value="F" class="md-primary">Femenino</md-radio-button>
+            </md-radio-group>
+          </md-input-container>
+          <md-input-container>
+            <p>Estado civil</p>
+            <md-radio-group ng-model="user.estadoCivil">
+              <md-radio-button value="1" class="md-primary">Soltero</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Casado</md-radio-button>
+              <md-radio-button value="3" class="md-primary">Separado</md-radio-button>
+              <md-radio-button value="4" class="md-primary">Viudo</md-radio-button>
+              <md-radio-button value="5" class="md-primary">Unión Libre</md-radio-button>
+            </md-radio-group>
+          </md-input-container>
+          <md-input-container>
+            <p>Regimen patrimonial del matrimonio</p>
+            <md-radio-group ng-model="user.regimenPatrimonialMatrimonio">
+              <md-radio-button value="1" class="md-primary">Separación de bienes</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Sociedad conyugal</md-radio-button>
+              <md-radio-button value="3" class="md-primary">Sociedad legal</md-radio-button>
+            </md-radio-group>
+          </md-input-container>
+          <md-input-container>
+            <p>La vivienda que actualmente habita es</p>
+            <md-radio-group ng-model="user.vivienda">
+              <md-radio-button value="1" class="md-primary">Propia</md-radio-button>
+              <md-radio-button value="2" class="md-primary">De familiares</md-radio-button>
+            </md-radio-group>
+          </md-input-container>
+          <md-input-container>
+            <p>Nivel de escolaridad</p>
+            <md-radio-group ng-model="user.nivelEscolaridad">
+              <md-radio-button value="1" class="md-primary">Sin estudios</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Primaria</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Secundaria</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Preparatoria</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Técnico</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Licenciatura</md-radio-button>
+              <md-radio-button value="2" class="md-primary">Postgrado</md-radio-button>
+            </md-radio-group>
+          </md-input-container>
+          <h3 class="md-title">Empleo</h3>
+          <md-input-container>
+            <label>Nombre de la empresa o patrón</label>
+            <input ng-model="user.empresaPatron">
+          </md-input-container> 
+          <md-input-container>
+            <label>Número de registro patronal (NRP)</label>
+            <input ng-model="user.numRegistroPatronal">
+          </md-input-container> 
+          <p>Teléfono donde trabaja el derechohabiente</p>
+          <md-content layout="row">
+            <md-content layout="column" flex="20"  >
+              <md-input-container>
+                <label>Lada</label>
+                <input ng-model="user.empresaLada" md-maxlength="3" type="number" >
+
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="40">
+              <md-input-container>
+                <label>Teléfono</label>
+                <input ng-model="user.empresaTelefono" md-maxlength="10" type="tel">
+              </md-input-container> 
+            </md-content>   
+            <md-content layout="column" flex="40">
+              <md-input-container>
+                <label>Extensión</label>
+                <input ng-model="user.empresaExtension" md-maxlength="10" type="number">
+              </md-input-container> 
+            </md-content>     
+          </md-content>
+          <p>Horario laboral</p>
+          <md-content layout="row">
+            <md-content layout="column" flex="50"  >
+              <md-input-container>
+                <label>De</label>
+                <input  type="time" ng-model="user.horarioInicio" >
+
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="50">
+              <md-input-container>
+                <label>A</label>
+                <input  type="time" ng-model="user.horarioFin" >
+              </md-input-container> 
+            </md-content>      
+          </md-content>
+        </md-content>
+      </md-tab>
+      <md-tab label="Referencias">
+        <md-content class="md-padding md-body-2" layout="column">
+          <h1 class="md-headline">2. Referencias familiares</h1>
+          <md-card  class="md-whiteframe-1dp" layout="column" layout-padding>
+           <h2 class="md-title">Primer referencia</h2>
+           <md-content layout="row">
+            <md-content layout="column" flex="33"  >
+              <md-input-container>
+                <label>Nombre(s)</label>
+                <input ng-model="user.referencias_nombre" required>
+                <div ng-messages="projectForm.referencias_nombre.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="33">
+              <md-input-container>
+                <label>Apellido paterno</label>
+                <input ng-model="user.referencias_apdPaterno" required>
+                <div ng-messages="projectForm.referencias_apdPaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="33">
+              <md-input-container>
+                <label>Apellido materno</label>
+                <input ng-model="user.referencias_apdMaterno" required>
+                <div ng-messages="projectForm.referencias_apdMaterno.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container> 
+            </md-content>
+          </md-content> 
+          <md-content layout="row">
+            <md-content layout="column" flex="33"  >
+              <md-input-container>
+                <label>Lada</label>
+                <input ng-model="user.referencias_lada" required>
+                <div ng-messages="projectForm.referencias_lada.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="33"  >
+              <md-input-container>
+                <label>Teléfono</label>
+                <input ng-model="user.referencias_telefono" required>
+                <div ng-messages="projectForm.referencias_telefono.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container>      
+            </md-content>
+            <md-content layout="column" flex="33">
+              <md-input-container>
+                <label>Celular</label>
+                <input ng-model="user.referencias_celular" required>
+                <div ng-messages="projectForm.referencias_celular.$error">
+                  <div ng-message="md-required">Campo obligatorio</div>
+                </div>
+              </md-input-container> 
+            </md-content>
+          </md-content> 
+          <md-input-container>
+            <label>Parentesco</label>
+            <input ng-model="user.referencias_parentesco" required>
+            <div ng-messages="projectForm.referencias_parentesco.$error">
+              <div ng-message="md-required">Campo obligatorio</div>
+            </div>
+          </md-input-container> 
+        </md-card>
+        <md-card  class="md-whiteframe-1dp" layout="column" layout-padding>
+         <h2 class="md-title">Segunda referencia</h2>
+         <md-content layout="row">
+          <md-content layout="column" flex="33"  >
+            <md-input-container>
+              <label>Nombre(s)</label>
+              <input ng-model="user.referencias_nombre2" required>
+              <div ng-messages="projectForm.referencias_nombre2.$error">
+                <div ng-message="md-required">Campo obligatorio</div>
+              </div>
+            </md-input-container>      
+          </md-content>
+          <md-content layout="column" flex="33"  >
+            <md-input-container>
+              <label>Apellido paterno</label>
+              <input ng-model="user.referencias_apdPaterno2" required>
+              <div ng-messages="projectForm.referencias_apdPaterno2.$error">
+                <div ng-message="md-required">Campo obligatorio</div>
+              </div>
+            </md-input-container>      
+          </md-content>
+          <md-content layout="column" flex="33">
+            <md-input-container>
+              <label>Apellido materno</label>
+              <input ng-model="user.referencias_apdMaterno2" required>
+              <div ng-messages="projectForm.referencias_apdMaterno2.$error">
+                <div ng-message="md-required">Campo obligatorio</div>
+              </div>
+            </md-input-container> 
+          </md-content>
+        </md-content> 
+        <md-content layout="row">
+          <md-content layout="column" flex="33"  >
+            <md-input-container>
+              <label>Lada</label>
+              <input ng-model="user.referencias_lada2" required>
+              <div ng-messages="projectForm.referencias_lada2.$error">
+                <div ng-message="md-required">Campo obligatorio</div>
+              </div>
+            </md-input-container>      
+          </md-content>
+          <md-content layout="column" flex="33"  >
+            <md-input-container>
+              <label>Teléfono</label>
+              <input ng-model="user.referencias_telefono2" required>
+              <div ng-messages="projectForm.referencias_telefono2.$error">
+                <div ng-message="md-required">Campo obligatorio</div>
+              </div>
+            </md-input-container>      
+          </md-content>
+          <md-content layout="column" flex="33">
+            <md-input-container>
+              <label>Celular</label>
+              <input ng-model="user.referencias_celular2" required>
+              <div ng-messages="projectForm.referencias_celular2.$error">
+                <div ng-message="md-required">Campo obligatorio</div>
+              </div>
+            </md-input-container> 
+          </md-content>
+        </md-content> 
+        <md-input-container>
+          <label>Parentesco</label>
+          <input ng-model="user.referencias_parentesco2" required>
+          <div ng-messages="projectForm.referencias_parentesco.$error">
+            <div ng-message="md-required">Campo obligatorio</div>
+          </div>
+        </md-input-container> 
+      </md-card>
+
+    </md-content>
+  </md-tab>
+  <md-tab label="Crédito">
+    <md-content class="md-padding md-body-2" layout="column">
+      <h1 class="md-headline">3. Datos para determinar el monto del crédito</h1>
+
+      <p>A) En caso de tener descuentos:</p>
+      <md-input-container class="md-icon-float md-icon-right md-block">
+        <label>Descuento mensual por pensión alimenticia (En su Caso)</label>
+        <input type="number" ng-model="user.descuentoMPensionAlimenticia">
+      </md-input-container>
+      <md-input-container>
+        <p>B) Plazo del crédito:</p>
+        <md-radio-group ng-model="user.plazoCredito">
+          <md-radio-button value="1" class="md-primary">12 meses</md-radio-button>
+          <md-radio-button value="2" class="md-primary">18 meses</md-radio-button>
+          <md-radio-button value="3" class="md-primary">24 meses</md-radio-button>
+          <md-radio-button value="4" class="md-primary">30 meses</md-radio-button>
+        </md-radio-group>
+      </md-input-container>
+      <p>C) En caso de así necesitarlo:</p>
+      <md-input-container>
+        <label>Monto para pago de mano de obra</label>
+        <input type="number" ng-model="user.montoManoObra">
+      </md-input-container>
+      <p>D) Monto de crédito solicitado:</p>
+      <md-input-container>
+        <label>Monto</label>
+        <input type="number" ng-model="user.montoCreditoSolicitado">
+      </md-input-container>
+    </md-content>
+  </md-tab>
+  <md-tab label="Autenticación">
+    <md-content class="md-padding md-body-2" layout="column">
+      <h1 class="md-headline">4. Datos para iniciar sesión en la aplicación</h1>
+      <md-input-container>
+        <label>Correo electrónico</label>
+        <input type="email" ng-model="user.email">
+      </md-input-container>
+      <md-input-container>
+        <label>Contraseña</label>
+        <input type="password" ng-model="user.contrasena">
+      </md-input-container>
+      <md-input-container>
+        <label>Repite la contraseña</label>
+        <input type="password" ng-model="contrasena2">
+      </md-input-container>
+    </md-content>
+  </md-tab>
+</md-tabs>
+</form>
+</md-content>
+</div>

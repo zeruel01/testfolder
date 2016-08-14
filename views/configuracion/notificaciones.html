@@ -1,0 +1,14 @@
+<form method="post" ng-submit="configCtrl.guardarConfNoti()" name="notiForm">
+<md-content class="md-padding md-body-2" layout="column">
+	<md-list>
+		<md-list-item class="md-3-line">
+			<div class="md-list-item-text" layout="column">
+				<h3>Notificaciones</h3>
+				<p>Permitir a la aplicación recibir notificaciones</p>
+			</div>
+			<md-switch class="md-secondary" aria-label="Switch 1" ng-model="configCtrl.notiForm.permiteNotificaciones"></md-switch>
+		</md-list-item>
+	</md-list>
+	<md-button class="md-raised md-primary" type="submit">Guardar configuración</md-button>
+	</md-content>
+</form>

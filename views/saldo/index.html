@@ -1,0 +1,72 @@
+<div ng-controller="saldoController as saldoCtrl" ng-init="saldoCtrl.getStatusCredito()">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-dollar"></i> Saldo actual</span>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-href="#saldo/amortizacion" aria-label="Tabla de amortización">
+				<i class="fa fa-table fa-lg"></i>
+			</md-button>
+			<!-- <md-button class="md-icon-button" ng-href="#saldo/historico" aria-label="Histórico de pagos">
+				<i class="fa fa-history fa-lg"></i>
+			</md-button> -->
+			<md-button class="md-icon-button" ng-href="{{saldoCtrl.urlSaldoPDF}}" target="_blank" aria-label="Descargar estado de cuenta">
+				<i class="fa fa-download fa-lg"></i>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content>
+		<md-card  class="md-whiteframe-1dp" layout-padding>
+			<div  ng-show="saldoCtrl.accessObj.access">
+				<h1 class="md-title">Número de crédito:<strong>{{saldoCtrl.credito.numeroCredito}}</strong></h1>
+				<md-list flex>
+					<md-list-item class="md-3-line">
+						<div class="md-list-item-text" layout="column">
+						<h3>Importe a pagar</h3>
+						<h2>{{saldoCtrl.credito.importe}}</h2>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+					<md-list-item class="md-3-line">
+						<div class="md-list-item-text" layout="column">
+						<h3>Saldo actual</h3>
+						<p>{{saldoCtrl.credito.saldoActual}}</p>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+					<md-list-item class="md-3-line">
+						<div class="md-list-item-text" layout="column">
+						<h3>Saldo anterior</h3>
+						<p>{{saldoCtrl.credito.saldoAnterior}}</p>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+					<md-list-item class="md-3-line">
+						<div class="md-list-item-text" layout="column">
+						<h3>Fecha de corte</h3>
+						<p>{{saldoCtrl.credito.fechaCorte}}</p>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+					<md-list-item class="md-3-line">
+						<div class="md-list-item-text" layout="column">
+						<h3>Fecha límite de pago</h3>
+						<p>{{saldoCtrl.credito.fechaLimite}}</p>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+					<md-list-item class="md-3-line">
+						<div class="md-list-item-text" layout="column">
+						<h3>Periodo</h3>
+						<p>{{saldoCtrl.credito.periodo}}</p>
+						</div>
+						<md-divider></md-divider>
+					</md-list-item>
+				</md-list>
+			</div>
+			<div ng-show="!saldoCtrl.accessObj.access">
+				<p>{{saldoCtrl.accessObj.message}}</p>
+				<p ng-bind-html="saldoCtrl.accessObj.template"></p>
+			</div>
+		</md-card>
+	</md-content>
+</div>

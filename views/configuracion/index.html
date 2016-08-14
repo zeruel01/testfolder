@@ -1,0 +1,20 @@
+<div ng-controller="configuracionController as configCtrl">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-gear"></i> Configuración</span>
+		</div>
+	</md-toolbar>
+	<md-content>
+		<md-tabs  md-dynamic-height md-border-bottom>
+			<md-tab label="Perfil">
+				<ng-include src="'views/configuracion/perfil.html'"></ng-include>
+			</md-tab>
+			<md-tab label="Cuenta">
+				<ng-include src="'views/configuracion/cuenta.html'"></ng-include>
+			</md-tab>
+			<md-tab label="Notificaciones">
+				<ng-include src="'views/configuracion/notificaciones.html'"></ng-include>
+			</md-tab>
+		</md-tabs>
+	</md-content>
+</div>
