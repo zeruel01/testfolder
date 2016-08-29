@@ -4,7 +4,7 @@ angular.module('originacionApp')
     this.params=$routeParams,
     this.accessObj = {},
     this.mensaje = {},
-
+    this.mensajeForm ={};
     this.init = function(){
         $scope.$parent.$parent.loading=true;
         this.accessObj=AccessControl.havePermission('mensajes', $scope.solicitud, $scope.user);
@@ -63,70 +63,39 @@ angular.module('originacionApp')
             MensajesModel.update({id:mensajeActualizar}, {status:2});
         });
     }
+    this.save = function(){
+        this.mensajeForm.user_id = $scope.user.id;
+        this.mensajeForm.mensaje_padre = (angular.isDefined(this.mensajeForm.mensaje_padre)) ? this.mensajeForm.mensaje_padre : 0;
+        var nuevoMensaje = MensajesModel.new(this.mensajeForm, function(){
+            if(nuevoMensaje.id){
+                showMessage($mdToast, 'Mensaje enviado');
+                if(nuevoMensaje.mensaje_padre == 0){
+                    window.location = '#mensajes';
+                }else{
+                    window.location = '#mensajes/'+nuevoMensaje.mensaje_padre;
+                }
+            }else{
+                showMessage($mdToast, 'Ocurrió un error, intente mas tarde');
+            }
+            
+        });
+    }
     this.goBack = function(){
         window.location="#mensajes";
     },
-    this.new = function(ev, mensajeId){
-        var mensajePadre = this.mensaje;
-        var mensajeForm ={};
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-        $mdDialog.show( {
-            templateUrl: 'views/mensajes/form.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose:true,
-            fullscreen: useFullScreen,
-            controller:function ($scope, $mdDialog) {
-                $scope.mensajePadre = mensajePadre;
-
-                $scope.mensajeForm = mensajeForm;
-                
-                $scope.hide = function() {
-                    $mdDialog.hide();
-                };
-                $scope.cancel = function() {
-                    $mdDialog.cancel();
-                };
-                $scope.new = function(){
-                    console.log(mensajeForm);
-                    if(mensajeForm.asunto && mensajeForm.mensaje){
-                        console.log(mensajeForm);
-                        var nuevoMensaje = MensajesModel.new(mensajeForm, function(){
-                            showMessage($mdToast, 'Mensaje enviado');
-                            if(nuevoMensaje.mensaje_padre == 0){
-                                window.location = '#mensajes';
-                            }else{
-                                mensajePadre.mensajes.push(nuevoMensaje);
-                            }
-                            $mdDialog.hide();
-                        });
-                    }else{
-                        alert('Imgresa todos los campos');
-                        return;
-                    }
-                };
-
-            },
-            onComplete:function(){
-                if(angular.isDefined(mensajePadre.id)){
-                    mensajeForm.asunto = 'RE:'+mensajePadre.asunto;
-                    mensajeForm.mensaje_padre = mensajePadre.id;
-
-                }else{
-                    mensajeForm.mensaje_padre = '0';                    
-                }
-                mensajeForm.user_id = $scope.user.id;
-            }
-        });
-        $scope.$watch(function() {
-            return $mdMedia('xs') || $mdMedia('sm');
-        }, function(wantsFullScreen) {
-            $scope.customFullscreen = (wantsFullScreen === true);
-        });
-
-
+    this.new = function(){
+        window.location="#nuevo-mensaje";
     }
-
+    this.reply = function(id){
+        window.location="#responer-mensaje/"+id;
+    }
+    this.initMessage = function(id){
+        var mensaje = MensajesModel.get({id:id}, function(){
+            $scope.mensajesCtrl.mensajeForm.mensaje_padre = mensaje.id;
+            $scope.mensajesCtrl.mensajeForm.asunto = 'RE:'+mensaje.asunto;
+        });
+        
+    }
 
 
 }]);

@@ -28,6 +28,7 @@ angular.module('originacionApp').config(function($routeProvider){
   .when("/solicitud", {
     templateUrl : "views/solicitud/view.html"
   })
+    
   .when("/solicitud/edit", {
     templateUrl : "views/solicitud/edit.html"
   })
@@ -63,6 +64,15 @@ angular.module('originacionApp').config(function($routeProvider){
   })
   .when("/mensajes/:id", {
     templateUrl : "views/mensajes/view.html"
+  })
+  .when("/nuevo-mensaje", {
+    templateUrl : "views/mensajes/new.html"
+  })
+  .when("/responer-mensaje/:id", {
+    templateUrl : "views/mensajes/reply.html"
+  })
+  .when("/salir", {
+    templateUrl : "views/salir/index.html"
   })
   //este es digamos, al igual que en un switch el default, en caso que 
   //no hayamos concretado que nos redirija a la página principal

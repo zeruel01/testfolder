@@ -1,7 +1,8 @@
 
 "use strict";
 
-var regexIso8601 = /^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/;
+var regexIso8601 = 
+/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/;
 
 function convertDateStringsToDates(input)
 {
@@ -33,6 +34,54 @@ function convertDateStringsToDates(input)
 }
 
 
+aplicacion.filter('picker', function($filter,$interpolate) {
+  return function(value, filterName) {
+  if(filterName != null &&filterName !="")
+  {
+  	if(filterName.includes(':'))    
+    {
+            var result = $interpolate('{{value | ' + arguments[1] + '}}');
+        return result({value:arguments[0]});
+       //var filterName = [].splice.call(arguments, 1, 1)[0];
+       //return $filter(filterName)(value);
+      //  return $filter(filterName).apply(null, arguments);
+      //return arguments;
+      //return filterName;
+    }
+    else    	
+      return $filter(filterName)(value);
+      
+   }      
+    else 
+    return value;
+  };
+});
+
+
+
+aplicacion.filter('datefixer', function($filter,$interpolate) {
+  return function(value, filterName) {
+      
+  /*if(filterName != null &&filterName !="")
+  {
+  	if(filterName.includes(':'))    
+    {
+            var result = $interpolate('{{value | ' + arguments[1] + '}}');
+        return result({value:arguments[0]});
+       //var filterName = [].splice.call(arguments, 1, 1)[0];
+       //return $filter(filterName)(value);
+      //  return $filter(filterName).apply(null, arguments);
+      //return arguments;
+      //return filterName;
+    }
+    else    	
+      return $filter(filterName)(value);
+      
+   }      
+    else 
+    return value;*/
+  };
+});
 angular.module('originacionApp').config(function($mdThemingProvider,  $mdDateLocaleProvider, $httpProvider) {
   $mdThemingProvider.definePalette('amazingPaletteName', {
     '50': 'ffebee',
@@ -76,10 +125,16 @@ angular.module('originacionApp').config(function($mdThemingProvider,  $mdDateLoc
 
 
 }).constant("Config", {
-  //"ApiUrl": "http://nubelab.com/rest/",
-  "ApiUrl": "http://dev.ciberburo.com/ws/",
-  //"ApiUrl": "http://http://dev.ciberburo.com/api/public/",
-  "nameApp": "Ciberburó",
-  "SecureKey": "easyred",
-  "QualityPhoto": 20,
+    //"ApiUrl": "http://nubelab.com/rest/",
+    "ApiUrl": "http://dev.ciberburo.com/ws/",
+    //"ApiUrl": "http://http://dev.ciberburo.com/api/public/",
+    "nameApp": "Ciberburó",
+    "SecureKey": "easyred",
+    "QualityPhoto": 20,
+    //FACEBOOK
+    'appId'         : '288029191556183',
+    //GOOGLE
+    'client_id'     : '165054149619-hrtl33b02afkdntqioo2d23d4fd1uon6.apps.googleusercontent.com',
+    'client_secret' : 'nVnfduRRNcRb0QkykvvcbheU',
+    'redirect_uri'  : 'http://localhost/v3_soco_app/android/'
 });

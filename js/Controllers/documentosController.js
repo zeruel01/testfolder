@@ -1,6 +1,11 @@
 "use strict";
+
+
+
+
 angular.module('originacionApp')
-.controller('documentosController', ['$scope', 'DocumentosModel', '$routeParams','$timeout', '$mdToast', 'AccessControl', '$q', 'Config', function ($scope, DocumentosModel, $routeParams, $timeout, $mdToast, AccessControl, $q, Config) {
+.controller('documentosController', ['$scope', 'DocumentosModel', '$routeParams','$timeout', '$mdToast', 'AccessControl', '$q', 'Config',"$mdDialog"
+, function ($scope, DocumentosModel, $routeParams, $timeout, $mdToast, AccessControl, $q, Config,$mdDialog) {
 	this.loading = false;
 	this.params=$routeParams;
 	this.files = {};
@@ -122,6 +127,40 @@ angular.module('originacionApp')
 	this.goBack = function(){
 		window.location="#documentos";
 	}
+
+	this.openDialog= function (itemDocumento)
+	{
+
+		       //$scope.something = "asd";
+            //$scope.showDialog  //= function ( itemDocumento) {
+                //var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+
+                $mdDialog.show({
+                    controller: "dialogDocumentoController",
+                    templateUrl: 'views/documentos/dialogDoc.html',
+                    parent: angular.element(document.body),
+					scope:$scope,
+					preserveScope :true,
+                    //targetEvent: ev,
+                    clickOutsideToClose: true,
+                    fullscreen: false,
+                    locals: {
+                        item: itemDocumento
+                        //value: "zzz"
+                    }
+                })
+                .then(function (answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function () {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+
+            
+
+         //   };
+
+	}
+
 	this.eliminar = function(idDocumento){
 		if(confirm('¿Estas seguro que deseas eliminar este documento?')){
 			$scope.$parent.$parent.loading= true;
@@ -145,3 +184,37 @@ angular.module('originacionApp')
 	}
 
 }]);
+
+
+angular.module('originacionApp')
+.controller('dialogDocumentoController', [ 'item','$scope', 'DocumentosModel', '$routeParams','$timeout', '$mdToast', 'AccessControl', '$q', 'Config','$mdDialog',
+ function (item,$scope, DocumentosModel, $routeParams, $timeout, $mdToast, AccessControl, $q, Config,$mdDialog) {
+
+	 $scope.zitem=item;
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+
+			
+            $scope.uploadFile = function (id_documento) {
+				$scope.documentos.executeClick(id_documento);
+				
+                $mdDialog.hide();
+            };
+			
+            $scope.takePhoto = function (id_documento) {
+				$scope.documentos.takePhoto(id_documento);
+                $mdDialog.hide();
+            };
+
+
+	}
+
+	 ]);
+
+
+
+

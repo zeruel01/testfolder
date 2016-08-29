@@ -27,10 +27,50 @@
           <span>Ciberburó</span>
         </h2>
         <span flex></span>
-        <md-button aria-label="Favorite" ng-click="openNotifications()" ng-class="totalNotifications == 0 ? 'md-icon-button' : ''">
-          <!-- <i class="fa fa-bell fa-lg "></i> <md-badge class="md-warn" ng-show="totalNotifications > 0" >{{totalNotifications | ''}}</md-badge> -->
-          <i class="fa fa-bell fa-lg "></i> <md-badge class="md-warn" ng-show="totalNotifications > 0" ></md-badge>
-        </md-button>
+       
+       
+       <!--<md-button aria-label="Favorite" href="#/"   class="md-icon-button">
+          <i class="fa fa-home fa-lg" style="height: auto;"></i>  
+        </md-button>-->
+
+        <md-menu  md-position-mode="target-right target" ng-repeat="masterMenu in masterMenus">
+          <md-button aria-label=" demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            
+             <i class="fa fa-{{masterMenu.icon}} fa-lg "></i>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item ng-repeat="(key, item) in masterMenu.items">
+              <md-button href="{{item.link}}"  >
+                   <md-icon class="fa fa-{{item.icon}}"  style="height: auto;"> </md-icon>
+                <!--<i class="fa fa-{{item.icon}} "></i>                -->
+                 {{item.label}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+
+       <!--<md-menu  md-position-mode="target-right target">
+          <md-button aria-label=" demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            
+             <i class="fa fa-bell fa-lg "></i>
+          </md-button>
+          <md-menu-content width="6">
+            <md-menu-item ng-repeat="item in [1, 2, 3]">
+              <md-button  >
+                <i class="fa fa-bell "></i>
+                
+                Option {{item}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>-->
+
+
+        <!--<md-button aria-label="Favorite" ng-click="openNotifications()" ng-class="totalNotifications == 0 ? 'md-icon-button' : ''">
+          <i class="fa fa-bell fa-lg "></i> <md-badge class="md-warn" ng-show="totalNotifications > 0" ng-cloak>{{totalNotifications}}</md-badge> 
+        </md-button>-->
+
         <md-button class="md-icon-button" aria-label="Favorite" ng-click="showHelp()">
           <i class="fa fa-question-circle fa-lg "></i>
         </md-button>
@@ -38,7 +78,7 @@
     </md-toolbar>
     <md-content flex class="bg-huella">
 
-      <div layout="row" layout-align="center center" class="loading" id="loading" ng-show="loading">
+      <div layout="row" layout-align="center center" class="loading" id="loading" ng-show="loading" style="opacity:1">
         <div>
           <md-progress-circular  md-diameter="70" md-mode="indeterminate"></md-progress-circular>
         </div>Cargando...
@@ -93,8 +133,11 @@
   <script src="js/Controllers/configuracionController.js"></script> 
   <script src="js/Controllers/notificacionesController.js"></script> 
   <script src="js/Controllers/buroController.js"></script> 
-  <script src="js/Controllers/mensajesController.js"></script> 
+  <script src="js/Controllers/mensajesController.js"></script>
+  <script src="js/Controllers/salirController.js"></script>
+   
   <!-- Models-->
+
   <script src="js/Models/UserModel.js"></script> 
   <script src="js/Models/DocumentoModel.js"></script> 
   <script src="js/Models/SolicitudModel.js"></script> 

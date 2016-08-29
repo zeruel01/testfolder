@@ -3,19 +3,19 @@
 		<div class="md-toolbar-tools">
 			<span><i class="fa fa-dollar"></i> Saldo actual</span>
 			<span flex></span>
-			<md-button class="md-icon-button" ng-href="#saldo/amortizacion" aria-label="Tabla de amortización">
+			<md-button class="md-icon-button" ng-href="#saldo/amortizacion" aria-label="Tabla de amortización"  ng-show="saldoCtrl.credito.importe">
 				<i class="fa fa-table fa-lg"></i>
 			</md-button>
 			<!-- <md-button class="md-icon-button" ng-href="#saldo/historico" aria-label="Histórico de pagos">
 				<i class="fa fa-history fa-lg"></i>
 			</md-button> -->
-			<md-button class="md-icon-button" ng-href="{{saldoCtrl.urlSaldoPDF}}" target="_blank" aria-label="Descargar estado de cuenta">
+			<md-button class="md-icon-button" ng-href="{{saldoCtrl.urlSaldoPDF}}" target="_blank" aria-label="Descargar estado de cuenta"  ng-show="saldoCtrl.credito.importe">
 				<i class="fa fa-download fa-lg"></i>
 			</md-button>
 		</div>
 	</md-toolbar>
 	<md-content>
-		<md-card  class="md-whiteframe-1dp" layout-padding>
+		<md-card  class="md-whiteframe-1dp" layout-padding ng-show="saldoCtrl.credito.importe">
 			<div  ng-show="saldoCtrl.accessObj.access">
 				<h1 class="md-title">Número de crédito:<strong>{{saldoCtrl.credito.numeroCredito}}</strong></h1>
 				<md-list flex>

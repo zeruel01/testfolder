@@ -12,7 +12,7 @@
         <md-card layout-padding  ng-class="(mensajesCtrl.mensaje.tipo == 2)? 'mensaje-mesa' : ''">
             <md-card-content>
                 <h1  class="md-title">{{mensajesCtrl.mensaje.asunto}}</h1>
-                <p><small>{{mensajesCtrl.mensaje.fecha}}</small></p>
+                <p><small>{{mensajesCtrl.mensaje.fecha| date:'MM/dd/yyyy'}}</small></p>
                 <p>Escrito por: <strong ng-show="mensajesCtrl.mensaje.tipo==1">mi</strong><strong ng-show="mensajesCtrl.mensaje.tipo==2">Mesa de control</strong></p>
                 <p>{{mensajesCtrl.mensaje.mensaje}}</p>
             </md-card-content>
@@ -22,13 +22,13 @@
             <md-card layout-padding ng-repeat="mensaje in mensajesCtrl.mensaje.mensajes" ng-class="(mensaje.tipo == 2)? 'mensaje-mesa' : ''">
                 <md-card-content>
                     <h1  class="md-title">{{mensaje.asunto}}</h1>
-                    <p><small>{{mensaje.fecha}}</small></p>
+                    <p><small>{{mensaje.fecha| date:'MM/dd/yyyy'}}</small></p>
                     <p>Escrito por: <strong ng-show="mensaje.tipo==1">mi</strong><strong ng-show="mensaje.tipo==2">Mesa de control</strong></p>
                     <p>{{mensaje.mensaje}}</p>
                 </md-card-content>
             </md-card>
         </div>
-        <md-button class="md-fab md-fab-bottom-right" ng-click="mensajesCtrl.new()">
+        <md-button class="md-fab md-fab-bottom-right" ng-click="mensajesCtrl.reply(mensajesCtrl.mensaje.id, mensajesCtrl.mensaje.asunto)">
             <i class="fa fa-reply fa-lg"></i>
         </md-button>
     </md-content>

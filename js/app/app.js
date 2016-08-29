@@ -14,6 +14,7 @@ aplicacion.controller('AppCtrl', [
         $scope.registrationId = '';
         $scope.menuActivo = 'inicio';
         $scope.init = function(){
+            $('#loading').css('opacity', '.5');
             $scope.loading = true;
             var userCookie = localStorage.getItem("v3_soco_user");
             if(angular.isUndefined(userCookie)){
@@ -42,9 +43,43 @@ aplicacion.controller('AppCtrl', [
                                     $scope.solicitud.infoComplet = false;  
                                 }
 
-                                $scope.menu = Modules.getMenu($scope.user.role);
+                                $scope.menu = Modules.getMenu($scope.user.role+"Short");
                                 var totalNotifications = NotificacionesModel.get({userId:$scope.user.id, leido:0, tipo:2, scope:'total'}, function(){
                                     $scope.totalNotifications = totalNotifications.total;
+                                });
+
+                                
+                                $scope.menub = Modules.getMenu($scope.user.role);
+                                
+
+                                $scope.masterMenus = [
+                                    
+                                    {icon:"inbox",items:[]},
+                                    {icon:"credit-card-alt",items:[]},
+                                    
+                                    {icon:"cog",items:[]}
+
+                                ];
+
+                                $scope.masterMenus[0].items.push($scope.menub.notificaciones);
+                                $scope.masterMenus[0].items.push($scope.menub.mensajes);
+                                
+
+                                $scope.masterMenus[1].items.push($scope.menub.solicitud);
+                                $scope.masterMenus[1].items.push($scope.menub.documentos);
+                                $scope.masterMenus[1].items.push($scope.menub.credito);
+                                $scope.masterMenus[1].items.push($scope.menub.buro);
+                                
+                                $scope.masterMenus[1].items.push($scope.menub.saldo);
+                                $scope.masterMenus[1].items.push($scope.menub.calculadora);
+
+
+
+                                $scope.masterMenus[2].items.push($scope.menub.config);
+                                $scope.masterMenus[2].items.push({
+                                    icon:"sign-out",
+                                    label:"Salir",
+                                    link:"#salir"
                                 });
 
                             }); 
@@ -89,6 +124,7 @@ aplicacion.controller('AppCtrl', [
 
 
         };
+
         $scope.openMenu = function(active) {
             $mdSidenav('left').toggle({clickOutsideToClose: false});
             $scope.menuActivo = active;
@@ -103,6 +139,7 @@ aplicacion.controller('AppCtrl', [
             NotificacionesModel.save({usuarioId:$scope.user.id, scope:'updateUser'}, {status:0});
             window.location="index.html";
         } 
+
         $scope.openNotifications=function(){
             window.location="#notificaciones";
         } 

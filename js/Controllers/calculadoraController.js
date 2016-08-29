@@ -11,6 +11,20 @@ angular.module('originacionApp')
 	}
 	this.calcular = function(){
 		
+
+		if($scope.calculadoraCtrl.datos.nss==null|| $scope.calculadoraCtrl.datos.lenght<5)
+		{
+			showMessage($mdToast, 'campo nss incompleto');
+			return;
+		}
+
+
+		if($scope.calculadoraCtrl.datos.fechanacimiento==null)
+		{
+			showMessage($mdToast, 'campo fecha nacimiento incompleto');
+			return;
+		}
+
 		$scope.$parent.$parent.loading=true;
 		var calculo = CalculadoraModel.calcular(this.datos, function(){
 			$scope.calculadoraCtrl.result = calculo;

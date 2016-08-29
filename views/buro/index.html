@@ -3,7 +3,7 @@
 		<div class="md-toolbar-tools">
 			<span><i class="fa fa-bank"></i> Consulta de buró de crédito</span>
 			<span flex></span>
-			<md-button class="md-icon-button" ng-href="{{buroCtrl.urlBuroPDF}}" target="_blank" aria-label="Descargar estado de cuenta">
+			<md-button class="md-icon-button" ng-show ="buroCtrl.tableBuro.columns.length" ng-href="{{buroCtrl.urlBuroPDF}}" target="_blank" aria-label="Descargar estado de cuenta">
 				<i class="fa fa-download fa-lg"></i>
 			</md-button>
 		</div>
@@ -17,8 +17,11 @@
 					</tr>
 				</thead>
 				<tbody md-body>
-					<tr  md-row ng-repeat="(key, row) in buroCtrl.tableBuro.rows" ng-click="buroCtrl.view(row)">
-						<td  md-cell ng-repeat="(key, item) in row track by $index" ng-show="(key>0)? true : false">{{item}}</td >
+					<tr  md-row ng-repeat="(key, row) in buroCtrl.tBuroFormat.rows" ng-click="buroCtrl.view(row)">
+						<td  md-cell ng-repeat="(key, item) in row track by $index" ng-show="(key>0)? true : false">
+							{{item.value | picker:item.format}}
+							
+							</td >
 					</tr>
 				</tbody>
 			</table>

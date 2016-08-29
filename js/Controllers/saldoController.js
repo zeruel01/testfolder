@@ -19,7 +19,12 @@ angular.module('originacionApp')
 			},
 			function(){
 				if(angular.isUndefined(credito.id)){
-					showMessage($mdToast, 'No tiene crédito asociado');
+					if(angular.isDefined(credito.codigo_error)){
+						showMessage($mdToast, credito.codigo_error+': '+credito.mensaje);	
+					}else{
+						showMessage($mdToast, 'Ocurrió un error, intente mas tarde');	
+					}
+					
 				}else{
 					$scope.saldoCtrl.credito = credito;
 					$scope.saldoCtrl.urlSaldoPDF +=$scope.$parent.solicitud.id+'?id_user='+$scope.$parent.user.id+'&scope=saldosCreditoPDF';

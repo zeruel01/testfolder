@@ -28,9 +28,8 @@ ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
 			<md-content class="md-padding md-body-2" layout="column">
 				<md-input-container>
 					<label>Número de Seguridad Social (NSS)*</label>
-					<input ng-model="solicitudCtrl.solicitudForm.nss" type="number" name="nss" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="NSS"
-					
-					placeholder="9999999999"
+					<input ng-model="solicitudCtrl.solicitudForm.nss" type="text" name="nss" required ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="NSS"
+					ui-mask="9999999999" ui-mask-placeholder-char="_"     ui-options="{clearOnBlur:false,allowInvalidValue :true}" placeholder="9999999999" ui-mask-placeholder
 					
 					>
 				    <div ng-messages="solicitudForm.nss.$error" ng-show="solicitudForm.nss.$touched">
@@ -47,6 +46,8 @@ ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
 					 ng-disabled="!solicitudCtrl.solicitudForm.editable"
 					 aria-label="curp"
 					
+					ui-mask="AAAA999999AAAAAA99"	    ui-options="{clearOnBlur:false,allowInvalidValue :true,addDefaultPlaceholder :false }" ui-mask-placeholder-char="_"
+ ui-mask-placeholder
 				required
 				placeholder="AAAA999999AAAAAA99"
 				
@@ -66,6 +67,8 @@ ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
 					<input ng-model="solicitudCtrl.solicitudForm.rfc" type="text" name="rfc" ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="rfc"
 						pattern="^[a-zA-Z]{4}(\d{6})((\D|\d){0,3})?$"
 						
+						ui-options="{clearOnBlur:false,allowInvalidValue :true}" ui-mask="AAAA******?*?*?*" ui-mask-placeholder-char="_" ui-mask-placeholder
+
 						placeholder="CUPU800825569"
 						>
 					<div ng-messages="solicitudForm.rfc.$error" ng-show="solicitudForm.rfc.$touched">
@@ -503,7 +506,7 @@ ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
 				</md-input-container>
 				<md-input-container>
 					<label>Número de registro patronal (NRP)</label>
-					<input ng-model="solicitudCtrl.solicitudForm.numRegistroPatronal" type="number">
+					<input ng-model="solicitudCtrl.solicitudForm.numRegistroPatronal" type="number"  ng-disabled="!solicitudCtrl.solicitudForm.editable"  >
 				</md-input-container> 
 				<md-input-container class="md-input-has-placeholder">  
 					<label>Teléfono donde trabaja</label>

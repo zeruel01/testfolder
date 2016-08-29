@@ -14,14 +14,14 @@
 			<md-list-item class="md-3-line" ng-repeat="(key, item) in buroCtrl.detail.generales">
 				<div class="md-list-item-text" layout="column">
 					<h3>{{key}}</h3>
-					<p>{{item}}</p>
+					<p>	{{item.value | picker:item.format}}</p>
 				</div>
 				<md-divider></md-divider>
 			</md-list-item>
 		</md-list>
 		<h1 class="md-title" layout-padding>Historial de pagos</h1>
 		<md-tabs  md-dynamic-height md-border-bottom>
-			<md-tab label="{{item.anio}}" ng-repeat="(anio, item) in buroCtrl.detail.historial">
+			<md-tab label="{{item.anio|date:'yyyy'}}" ng-repeat="(anio, item) in buroCtrl.detail.historial">
 				<md-content class="md-padding md-body-2" layout="column">
 					<md-table-container>
 						<table md-table>
