@@ -23,7 +23,9 @@
 <!--  <md-list-item md-ripple-size="partial" class="custom-sidebar" ng-repeat="(key, item) in menu" href="{{item.link}}" layout="column" ng-click="openMenu(key)" layout="column" ng-class="menuActivo == key ? 'active' : ''" id="{{key}}" style="background-color:{{item.color}};">
 <p> <i class="fa fa-{{item.icon}} "></i> {{item.label}}</p>
 </md-list-item> -->
-<md-list-item md-ripple-size="partial" class="custom-sidebar" ng-repeat="(key, item) in menu" href="{{item.link}}" layout="column" ng-click="openMenu(key)" layout="column" ng-class="menuActivo == key ? 'active' : ''" id="{{key}}">
+<md-list-item md-ripple-size="partial" class="custom-sidebar" ng-repeat="(key, item) in menu" href="{{item.link}}" layout="column" ng-click="openMenu(key)" 
+
+layout="column" ng-class="menuActivo == key ? 'active' : ''" id="{{key}}">
     <p> <i class="fa fa-{{item.icon}} "></i> {{item.label}}</p>
     <md-divider></md-divider>
 </md-list-item>
