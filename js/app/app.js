@@ -4,6 +4,8 @@ var aplicacion = angular.module('originacionApp', ['md.data.table', 'ngMaterial'
 
 );
 
+
+
 aplicacion.controller('AppCtrl', [
     '$scope', '$mdBottomSheet','$mdSidenav', 'UserModel', 'SolicitudModel', 'Modules', '$mdDialog', '$mdMedia', '$mdToast', 'NotificacionesModel' , '$q', 'Config',
     function($scope, $mdBottomSheet, $mdSidenav, UserModel, SolicitudModel, Modules, $mdDialog, $mdMedia, $mdToast, NotificacionesModel, $q, Config){

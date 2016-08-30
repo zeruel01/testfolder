@@ -40,29 +40,25 @@
 				  	<div ng-messages-include="errorMessages"></div>
 				</div>
 			</md-input-container>
-
-            <!--ui-mask="AAAA999999AAAAAA99" ui-options="{clearOnBlur:false,allowInvalidValue :true,addDefaultPlaceholder :false }" 
-                        ui-mask-placeholder-char="_" ui-mask-placeholder-->
  			<md-input-container 	class="md-input-has-placeholder">
 				<label>CURP*</label>
 				<input  ng-model="registerCtrl.projectForm.curp"	type="text" name="curp"  aria-label="curp"  
                         pattern="^([a-zA-Z]{4})([0-9]{6})([H,M,h,m][a-zA-Z]{5})([0-9]{2})$"
                         required placeholder="AAAA999999AAAAAA99"
 
-                         
+                         ui-mask="AAAA999999AAAAAA99" ui-options="{clearOnBlur:false,allowInvalidValue :true,addDefaultPlaceholder :false }" 
+                        ui-mask-placeholder-char="_" ui-mask-placeholder
                         
                          >
 				<div ng-messages="projectForm.curp.$error" ng-show="projectForm.curp.$touched">
 					<div ng-messages-include="errorMessagesCurp"></div>
 				</div>
-			</md-input-container>			
-
-                  <!--ui-options="{clearOnBlur:false,allowInvalidValue :true}"
-                         ui-mask="AAAA999999?*?*?*" ui-mask-placeholder-char="_" ui-mask-placeholder	-->
+			</md-input-container>				
             <md-input-container>
                 <label>RFC</label>
                 <input ng-model="registerCtrl.projectForm.rfc" type="text" name="rfc" aria-label="rfc" required pattern="^[a-zA-Z]{4}(\d{6})((\D|\d){3})?$"
-                  
+                        ui-options="{clearOnBlur:false,allowInvalidValue :true}"
+                         ui-mask="AAAA999999?*?*?*" ui-mask-placeholder-char="_" ui-mask-placeholder
                          
                           >
                 <div ng-messages="projectForm.rfc.$error" ng-show="projectForm.rfc.$touched">

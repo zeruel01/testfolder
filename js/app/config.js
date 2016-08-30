@@ -82,7 +82,21 @@ aplicacion.filter('datefixer', function($filter,$interpolate) {
     return value;*/
   };
 });
-angular.module('originacionApp').config(function($mdThemingProvider,  $mdDateLocaleProvider, $httpProvider) {
+
+
+/*angular.module('originacionApp').config(['uiMask.ConfigProvider', function(uiMaskConfigProvider) {
+  if (android)
+      uiMaskConfigProvider.eventsToHandle(['keyup', 'click', 'focus']);
+}]);*/
+angular.module('originacionApp').config(
+    ["$mdThemingProvider",  "$mdDateLocaleProvider", "$httpProvider",'uiMask.ConfigProvider',
+    
+    function($mdThemingProvider,  $mdDateLocaleProvider, $httpProvider  ,uiMaskConfigProvider
+    
+    ) {
+
+ uiMaskConfigProvider.eventsToHandle(['keyup', 'click', 'focus']);
+          //if (android)     
   $mdThemingProvider.definePalette('amazingPaletteName', {
     '50': 'ffebee',
     '100': 'ffcdd2',
@@ -124,7 +138,7 @@ angular.module('originacionApp').config(function($mdThemingProvider,  $mdDateLoc
             };
 
 
-}).constant("Config", {
+}]).constant("Config", {
     //"ApiUrl": "http://nubelab.com/rest/",
     "ApiUrl": "http://dev.ciberburo.com/ws/",
     //"ApiUrl": "http://http://dev.ciberburo.com/api/public/",
@@ -138,3 +152,4 @@ angular.module('originacionApp').config(function($mdThemingProvider,  $mdDateLoc
     'client_secret' : 'nVnfduRRNcRb0QkykvvcbheU',
     'redirect_uri'  : 'http://localhost/v3_soco_app/android/'
 });
+
