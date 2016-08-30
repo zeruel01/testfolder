@@ -67,7 +67,7 @@ ng-click="solicitudCtrl.editarSolicitud(solicitudForm.$valid)"-->
 					<input ng-model="solicitudCtrl.solicitudForm.rfc" type="text" name="rfc" ng-disabled="!solicitudCtrl.solicitudForm.editable" aria-label="rfc"
 						pattern="^[a-zA-Z]{4}(\d{6})((\D|\d){0,3})?$"
 						
-						ui-options="{clearOnBlur:false,allowInvalidValue :true}" ui-mask="AAAA******?*?*?*" ui-mask-placeholder-char="_" ui-mask-placeholder
+						 ui-options="{clearOnBlur:false,allowInvalidValue :true ,addDefaultPlaceholder :false}" ui-mask="AAAA******?*?*?*" ui-mask-placeholder-char="_" ui-mask-placeholder
 
 						placeholder="CUPU800825569"
 						>
