@@ -1,0 +1,22 @@
+<div ng-controller="mensajesController as mensajesCtrl" ng-init="mensajesCtrl.initMessage(mensajesCtrl.params.id)">
+    <form ng-submit="mensajesCtrl.save()">
+        <md-content layout-padding layout="column">
+            <input ng-model="mensajesCtrl.mensajeForm.mensaje_padre" type="hidden">
+            <md-input-container>
+                <label>Asunto</label>
+                <input ng-model="mensajesCtrl.mensajeForm.asunto" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Descripción</label>
+                <textarea ng-model="mensajesCtrl.mensajeForm.mensaje" required  md-select-on-focus rows="5"></textarea>
+            </md-input-container>
+            <md-button  class="md-raised md-primary" type="submit">
+                <i class="fa fa-send"></i> Enviar
+            </md-button>
+            <md-button href="#mensajes/{{mensajesCtrl.params.id}}">
+                Cerrar
+            </md-button>
+        </md-content>
+
+    </form>
+</div>

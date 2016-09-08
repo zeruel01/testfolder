@@ -1,0 +1,164 @@
+<html lang="es" ng-app="originacionApp">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+  <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="bower_components/slick-carousel/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="bower_components/slick-carousel/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<body layout="row" ng-controller="AppCtrl" ng-init="init()">
+  <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-swipe-left="toggleSidenav('left')">
+    <ng-include src="'views/app/sidebar.html'" style="top:0px"></ng-include>
+  </md-sidenav>
+  <div layout="column" class="relative" layout-fill role="main">
+    <img src="img/logo.png" style="width:30% !important;">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menú">
+          <i class="fa fa-bars fa-lg"></i>
+        </md-button>
+        <h2>
+          <span>Ciberburó</span>
+        </h2>
+        <span flex></span>
+       
+       
+       <!--<md-button aria-label="Favorite" href="#/"   class="md-icon-button">
+          <i class="fa fa-home fa-lg" style="height: auto;"></i>  
+        </md-button>-->
+
+        <md-menu  md-position-mode="target-right target" md-offset="-10 40" ng-repeat="masterMenu in masterMenus">
+          <md-button aria-label=" menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            
+             <i class="fa fa-{{masterMenu.icon}} fa-lg "></i>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item ng-repeat="(key, item) in masterMenu.items">
+              <md-button
+                   
+         ng-click="changeLocation(item.link)"
+                >
+                   <md-icon class="fa fa-{{item.icon}}"  style="height: auto;"> </md-icon>
+                <!--<i class="fa fa-{{item.icon}} "></i>                href="{{}}" -->
+                 {{item.label}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+
+       <!--<md-menu  md-position-mode="target-right target">
+          <md-button aria-label=" demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            
+             <i class="fa fa-bell fa-lg "></i>
+          </md-button>
+          <md-menu-content width="6">
+            <md-menu-item ng-repeat="item in [1, 2, 3]">
+              <md-button  >
+                <i class="fa fa-bell "></i>
+                
+                Option {{item}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>-->
+
+
+        <!--<md-button aria-label="Favorite" ng-click="openNotifications()" ng-class="totalNotifications == 0 ? 'md-icon-button' : ''">
+          <i class="fa fa-bell fa-lg "></i> <md-badge class="md-warn" ng-show="totalNotifications > 0" ng-cloak>{{totalNotifications}}</md-badge> 
+        </md-button>-->
+
+        <md-button class="md-icon-button" aria-label="Favorite" ng-click="showHelp()">
+          <i class="fa fa-question-circle fa-lg "></i>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content flex class="bg-huella">
+
+      <div layout="row" layout-align="center center" class="loading" id="loading" ng-show="loading" style="opacity:1">
+        <div>
+          <md-progress-circular  md-diameter="70" md-mode="indeterminate"></md-progress-circular>
+        </div>Cargando...
+      </div>
+      
+      <div ng-view></div>
+      <input type="text" ng-model="registrationId" id="registrationId" ng-change="updateDataUser()" style="visibility:hidden;"/>
+      <input type="text" ng-model="totalNotifications" id="totalNotifications" style="visibility:hidden;"/>
+    </md-content>
+  </div>
+
+  <!-- Angular Material Dependencies -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-base64/angular-base64.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+<!--   <script src="bower_components/angular-phonegap-ready/ready.js"></script>
+  <script src="bower_components/angular-phonegap-push-notification/push.js"></script> -->
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script> 
+
+  <script src="bower_components/slick-carousel/slick/slick.js"></script>
+  <script src="bower_components/angular-slick/dist/slick.js"></script>
+  <script src="bower_components/moment/moment.js"></script> 
+  
+  <script src="bower_components/uimask/uimask.js"></script>
+  
+  <script src="js/app/app.js"></script> 
+  <script src="js/app/routes.js"></script> 
+  <script src="js/app/directives.js"></script> 
+  <script src="js/app/helpers.js"></script> 
+  <script src="js/app/config.js"></script> 
+  <script src="js/app/accessControl.service.js"></script> 
+  <script src="js/app/modules.service.js"></script> 
+  <script src="js/app/push.js"></script> 
+  <!-- <script src="js/app/camera.js"></script>  -->
+
+  <!-- Controllers-->
+  <script src="js/Controllers/documentosController.js"></script> 
+  <script src="js/Controllers/dashboardController.js"></script> 
+  <script src="js/Controllers/solicitudController.js"></script> 
+  <script src="js/Controllers/calculadoraController.js"></script> 
+  <script src="js/Controllers/userController.js"></script> 
+  <script src="js/Controllers/creditoController.js"></script> 
+  <script src="js/Controllers/saldoController.js"></script> 
+  <script src="js/Controllers/configuracionController.js"></script> 
+  <script src="js/Controllers/notificacionesController.js"></script> 
+  <script src="js/Controllers/buroController.js"></script> 
+  <script src="js/Controllers/mensajesController.js"></script>
+  <script src="js/Controllers/salirController.js"></script>
+   
+  <!-- Models-->
+
+  <script src="js/Models/UserModel.js"></script> 
+  <script src="js/Models/DocumentoModel.js"></script> 
+  <script src="js/Models/SolicitudModel.js"></script> 
+  <script src="js/Models/CalculadoraModel.js"></script> 
+  <script src="js/Models/NotificacionesModel.js"></script> 
+  <script src="js/Models/PublicidadModel.js"></script> 
+  <script src="js/Models/BuroModel.js"></script> 
+  <script src="js/Models/MensajesModel.js"></script> 
+
+
+<!-- Services-->
+  <script src="js/Services/serviceZipCodes.js"></script> 
+
+  <script type="text/javascript" src="phonegap.js"></script> 
+  <!--
+  <script type="text/javascript" src="PushNotification.js"></script>  -->
+
+
+  
+</body>
+</html>

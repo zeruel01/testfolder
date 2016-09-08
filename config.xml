@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.originacion.app"
+        version   = "0.1.0">
+
+    <name>ciberburo</name>
+
+    <description>
+    Aplicación móvil de originación V3 
+    </description>
+
+    <author href="http://phonegap.com" email="alma0521@gmail.com">
+    Alma Carmona Magaña
+    </author>
+     <access origin="*"/>
+    <icon src="icon.png" />
+    <preference name="SplashScreen" value="splash"/>
+    <preference name="windows-target-version" value="8.1" />
+    <splash src="splash.png" />
+    <splash src="splash/Android/Landscape/hdpi.png" platform="android" qualifier="land-hdpi"/>
+    <splash src="splash/Android/Landscape/ldpi.png" platform="android" qualifier="land-ldpi"/>
+    <splash src="splash/Android/Landscape/mdpi.png" platform="android" qualifier="land-mdpi"/>
+    <splash src="splash/Android/Landscape/xhdpi.png" platform="android" qualifier="land-xhdpi"/>
+ 
+    <splash src="splash/Android/Portrait/hdpi.png" platform="android"  qualifier="port-hdpi"/>
+    <splash src="splash/Android/Portrait/ldpi.png" platform="android"  qualifier="port-ldpi"/>
+    <splash src="splash/Android/Portrait/mdpi.png" platform="android"  qualifier="port-mdpi"/>
+    <splash src="splash/Android/Portrait/xhdpi.png" platform="android"  qualifier="port-xhdpi"/>
+    <plugin name="cordova-plugin-splashscreen" source="npm" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <platform name="windows">
+    </platform>
+    <gap:plugin name="org.apache.cordova.file" spec="https://github.com/apache/cordova-plugin-file.git"/>
+    <gap:plugin name="org.apache.cordova.file-transfer" spec="https://github.com/apache/cordova-plugin-file-transfer.git"/>
+    <gap:plugin name="org.apache.cordova.camera"  spec="https://github.com/apache/cordova-plugin-camera.git" />
+    <gap:plugin name="org.apache.cordova.network-information" spec="https://github.com/apache/cordova-plugin-network-information.git"/>
+    <gap:plugin name="org.apache.cordova.device" spec="https://github.com/apache/cordova-plugin-device.git"/>
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
+</widget>

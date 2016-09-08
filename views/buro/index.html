@@ -1,0 +1,37 @@
+<div ng-controller="buroController as buroCtrl" ng-init="buroCtrl.getBuro()">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-bank"></i> Consulta de buró de crédito</span>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-show ="buroCtrl.tableBuro.columns.length" ng-href="{{buroCtrl.urlBuroPDF}}" target="_blank" aria-label="Descargar estado de cuenta">
+				<i class="fa fa-download fa-lg"></i>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content>
+		<md-table-container ng-show="buroCtrl.accessObj.access">
+			<table md-table md-row-select  ng-model="buroCtrl.selected" id="tableResult">
+				<thead md-head>
+					<tr  md-row>
+						<th  md-column  ng-repeat="(key, header) in buroCtrl.tableBuro.columns" ng-show="(key>0)? true : false">{{header}}</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr  md-row ng-repeat="(key, row) in buroCtrl.tBuroFormat.rows" ng-click="buroCtrl.view(row)">
+						<td  md-cell ng-repeat="(key, item) in row track by $index" ng-show="(key>0)? true : false">
+							{{item.value | picker:item.format}}
+							
+							</td >
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+		<div  layout-padding>
+			<md-whiteframe class="md-whiteframe-1dp" layout="column" ng-show="!buroCtrl.accessObj.access">
+				<p>{{buroCtrl.accessObj.message}}</p>
+				<p ng-bind-html="buroCtrl.accessObj.template"></p>
+
+			</md-whiteframe>
+		</div>
+	</md-content>
+</div>

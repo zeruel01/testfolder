@@ -1,0 +1,12 @@
+<div ng-controller="solicitudController as solicitudCtrl" ng-init="solicitudCtrl.initCreate()" >
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span>Crear solicitud de crédito</span>
+		</div>
+	</md-toolbar>
+	<md-content>
+		<form method="post" ng-submit="solicitudCtrl.editarSolicitudMain()"  name="solicitudForm">
+			<ng-include src="'views/solicitud/form.html'" style="top:0px" ></ng-include>
+		</form>		
+	</md-content>
+</div>

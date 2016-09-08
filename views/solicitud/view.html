@@ -1,0 +1,29 @@
+<div ng-controller="solicitudController as solicitudCtrl" ng-init="solicitudCtrl.init()">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-file-text"></i> Datos de la solicitud</span>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-href="#solicitud/edit" ng-show="$parent.solicitud.id" aria-label="Editar solicitud"
+			
+			>
+				<i class="fa fa-pencil fa-lg"></i>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content  class="md-padding" ng-show="$parent.solicitud.id">
+		<!-- <h3 class="md-title">Datos de usuario</h3>
+		<p ng-repeat="(key, item) in $parent.user">{{$parent.solicitud.getLabel(key)}}: {{item}}</p> -->
+		<!-- <h3 class="md-title">Datos de la solicitud</h3> -->
+		<!-- <p ng-repeat="(key, item) in $parent.solicitud">{{$parent.solicitud.getLabel(key)}}: {{item}}</p> -->
+		<form method="post" name="solicitudForm">
+			<ng-include src="'views/solicitud/form.html'" style="top:0px"></ng-include>
+		</form>
+		
+	</md-content>
+	<div  layout-padding ng-show="!$parent.solicitud.id">
+		<md-whiteframe class="md-whiteframe-1dp" layout="column">
+			<p>No has solicitado ningún crédito</p>
+			<a href="#solicitud/create" class="md-raised md-primary md-button" >Solicitar crédito</a>
+		</md-whiteframe>
+	</div>
+</div>

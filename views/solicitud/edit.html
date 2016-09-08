@@ -1,0 +1,20 @@
+<div ng-controller="solicitudController as solicitudCtrl" ng-init="solicitudCtrl.initEdit()" >
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span>Editar solicitud de crédito</span>
+		</div>
+	</md-toolbar>
+	<md-content layout-padding >
+	
+		<div ng-show="!solicitudCtrl.solicitudForm.editable" class="md-whiteframe-1dp" >
+			<p class="error">  Ya no es posible editar la información de la solicitud</p>
+		</div>
+		<div>
+			<form method="post" ng-submit="solicitudCtrl.editarSolicitud(solicitudForm.$valid)" name="solicitudForm" novalidate>
+				<input type="hidden" ng-model="solicitudCtrl.solicitudForm.id">
+				<ng-include src="'views/solicitud/form.html'" style="top:0px"></ng-include>
+			</form>
+		</div>
+		
+	</md-content>
+</div>

@@ -1,0 +1,34 @@
+<form name="loginForm" ng-submit="login.autenticar()" ng-controller="loginController as login" ng-init="login.init()">
+    <img src="img/logo.png" style="width:60% !important; margin:0 20%;">
+    <md-content layout="column" layout-padding class="bg-huella" >
+        <!-- <small>Datos de prueba: testXXXXXXXXXXXXXX, test</small> -->
+        <div ng-show="login.loading" layout="row" layout-align="center" >
+            <md-progress-linear md-mode="indeterminate" class="loadIndeterminate"></md-progress-linear>
+        </div>
+        <md-input-container>
+            <label>Email</label>
+            <input ng-model="login.loginForm.email"  required type="email">
+            <div ng-messages="loginForm.email.$error">
+                <div ng-message="md-required">Ingrese un correo válido</div>
+            </div>
+        </md-input-container>
+        <md-input-container>
+            <label>Contraseña</label>
+            <input ng-model="login.loginForm.password" type="password" required md-no-asterisk>
+            <div ng-messages="loginForm.password.$error">
+                <div ng-message="md-required">Ingrese su contraseña</div>
+            </div>
+        </md-input-container>
+        <md-button class="md-raised md-primary" flex="100" flex-sm="100" type="submit">Ingresar</md-button>
+        <div>
+            <p>{{message}}</p>
+            <p class="error">
+                {{errorMessage}}
+            </p>
+        </div>
+        <md-button class="md-raised md-primary button-fb" ng-click="login.loginFacebook()">Ingresar con Facebook <i class="fa fa-facebook fa-lg"></i></md-button>
+        <md-button class="md-raised md-primary button-go" ng-click="login.loginGoogle()">Ingresar con Google+ <i class="fa fa-google-plus fa-lg"></i></md-button>
+        <md-button href="#recover" class="md-primary"> ¿Olvidaste tu contraseña?</md-button>
+        <md-button href="#register" class="md-primary"> ¿No tienes cuenta? Regístrate</md-button>
+    </md-content>
+</form>

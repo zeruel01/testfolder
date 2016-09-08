@@ -1,0 +1,66 @@
+<div ng-controller="creditoController as creditoCtrl" ng-init="creditoCtrl.getStatusCredito()">
+	<md-toolbar layout="row" class="md-hue-3">
+		<div class="md-toolbar-tools">
+			<span><i class="fa fa-credit-card"></i> Estatus de la solicitud</span>
+			<span flex></span>
+		</div>
+	</md-toolbar>
+	<md-content  layout-padding>
+		<div class="md-whiteframe-1dp">
+			<div ng-show="creditoCtrl.accessObj.access">
+				<h1 class="md-title">Número de solicitud:{{creditoCtrl.credito.numeroSolicitud}}</h1>
+				<p>Estatus:<strong>{{creditoCtrl.credito.statusDescripcion}}</strong></p>
+				<p>{{creditoCtrl.credito.mensaje}}</p>
+			</div>
+			<div ng-show="!creditoCtrl.accessObj.access">
+				<p>{{creditoCtrl.accessObj.message}}</p>
+				<p ng-bind-html="creditoCtrl.accessObj.template"></p>
+			</div>
+		</div>
+		<br>
+<div class="md-whiteframe-1dp" layout="row"  ng-if="listadoFaltantes.length>0" >
+<p flex>Documentos faltantes  <strong>{{listadoFaltantes.length}} </strong></p>
+   <md-button  class="md-primary"	
+                   
+         ng-click="changeLocation(menub.documentos.link)"
+                >
+                   <md-icon class="fa fa-{{menub.documentos.icon}} md-primary"   style="height: auto;"> </md-icon>
+                <!--<i class="fa fa-{{item.icon}} "></i>                href="{{}}" -->
+               Agregar  {{menub.documentos.label}}
+              </md-button>
+
+</div>
+
+	<br>
+
+<div class="md-whiteframe-1dp" layout="row"  ng-if="mensajes.length>0" >
+<p flex>Ultimo Mensaje: <strong> {{item.tipo==1?'Yo':'Mesa de control'}} </strong> - {{mensajes[0].asunto}} </p>
+   <md-button  class="md-primary"	
+                   
+         ng-click="changeLocation(menub.mensajes.link)"
+                >
+                   <md-icon class="fa fa-{{menub.mensajes.icon}} md-primary"   style="height: auto;"> </md-icon>
+                <!--<i class="fa fa-{{item.icon}} "></i>                href="{{}}" -->
+               Ver  {{menub.mensajes.label}}
+              </md-button>
+
+</div>
+
+<!---->
+				<!--<md-divider ng-if="listadoFaltantes.length>0"></md-divider>
+				<md-subheader class="md-no-sticky" ng-if="listadoFaltantes.length>0" >Documentos faltantes</md-subheader>
+				<div ng-repeat="item in listadoFaltantes" ng-if="listadoFaltantes.length>0" >
+
+						<md-list-item id="item_{{item.id_documento}}" >
+
+
+						<div >
+							<p>{{ item.name }}</p>
+						</div>
+						
+						
+					</md-list-item>
+				</div>-->
+	
+	</md-content>
+</div>
